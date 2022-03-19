@@ -1,0 +1,7 @@
+<!-- funções iniciais -->
+<?php 
+
+
+
+
+?>
