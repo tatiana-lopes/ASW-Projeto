@@ -4,7 +4,7 @@
     <div class="container py-5 h-100">
     <div class="row d-flex align-items-center justify-content-center h-100">
       <div class="col-md-8 col-lg-7 col-xl-6">
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="Phone image">
+        <img src="./img/volunteer.png" class="img-fluid" alt="voluntariado">
       </div>
       <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
         <form action="./app/loginUser.php">
@@ -42,7 +42,7 @@
             <p class="text-center fw-bold mx-3 mb-0 text-muted ">OU</p>
           </div>
 
-          <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="./index.php?page=register" role="button">
+          <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="./index.php?page=registerInst" role="button">
             Registar Instituição
           </a>
           <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="./index.php?page=register" role="button">
