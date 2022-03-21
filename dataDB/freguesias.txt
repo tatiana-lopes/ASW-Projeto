@@ -1,0 +1,21 @@
+INSERT INTO 
+	Freguesia(cod_concelho,codigo, nome )
+VALUES
+	('1101', '01' 'Paço de Arcos'),
+	('1115', 'Amadora'),
+	('1102', 'Arruda dos Vinhos'),
+	('1103', 'Azambuja'),
+	('1104', 'Cadaval'),
+	('1105', 'Cascais'),
+	('1106', 'Lisboa'),
+	('1107', 'Loures'),
+	('1108', 'Lourinhã'),
+	('1109', 'Mafra'),
+	('1116', 'Odivelas'),
+	('1110', 'Oeiras'),
+	('1111', 'Sintra'),
+	('1112', 'Sobral de Monte Agraço'),
+	('1113', 'Torres Vedras'),
+	('1114', 'Vila Franca de Xira')
+
+

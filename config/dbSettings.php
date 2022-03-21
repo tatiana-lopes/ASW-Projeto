@@ -1,6 +1,7 @@
 <?php
-$serverName = "localhost";
-$databaseName ="FCULREFOOD";
-$userName = "asw09";
-$password = "aswgrupo09";
+define('DB_SERVIDOR','localhost');
+define('DB_NOME', 'FCULREFOOD');
+define('DB_USUARIO', 'asw09');
+define('DB_PASSWORD','aswgrupo09');
+
 ?>

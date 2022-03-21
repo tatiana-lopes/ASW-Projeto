@@ -1,7 +1,16 @@
 <?php
+require_once 'app/database.php';
+
 // getFreguesia()
 // getConselho()
+if($_SERVER["REQUEST_METHOD"] == "POST"){
 
+// ver se os dados são validos e depois inserir
+$query = 'INSERT INTO  Voluntario(email , cc , carta_conducao , genero , dob , imgPath  ) ';
+foreach($_POST as $chave => $valor){
+
+}
+}
 
 ?>
 

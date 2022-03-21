@@ -1,7 +1,8 @@
 <?php
-require_once '../config/dbSettings.php';
+
 
 function startConnection(){
+    require_once '../config/dbSettings.php';
     $conn = new mysqli($serverName, $userName, $password, $databaseName);
 
     if (!$conn) {
