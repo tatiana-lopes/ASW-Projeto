@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 $LocalDirectory = dirname(__FILE__);
 
 require_once  './config/init.php';
+
 include_once  './config/settings.php';
 include_once  './function.php';
 

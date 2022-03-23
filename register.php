@@ -1,41 +1,44 @@
 <?php
-require_once 'app/database.php';
+require_once 'functions/database.php';
 
-// getFreguesia()
-// getConselho()
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-
-// ver se os dados são validos e depois inserir
-$query = 'INSERT INTO  Voluntario(email , cc , carta_conducao , genero , dob , imgPath  ) ';
-foreach($_POST as $chave => $valor){
+if(!isset($_POST)){
+//erro
 
 }
+
 }
 
 ?>
 
-<article >
+<article class="form-group container">
 <div class="row">
 <form action="" method="post">
-
+<div class="col"> 
 <label for="nome">Nome</label>
-<input type="text" class="" id="nome">
+<input type="text" class="form-control" id="nome">
 
 <label for="email">Email</label>
-<input type="text"  class="" id="email">
-
+<input type="text"  class="form-control" id="email">
+</div>
+<div class="col">
+  
 <label for="password">Password</label>
-<input type="number"  class="" id="password">
+<input type="number"  class="form-control" id="password">
 
 <label for="cc">nº Cartão de Cidadão</label>
-<input type="number"  class="" id="cc">
+<input type="number"  class="form-control" id="cc">  
+</div>
+</div>
+<div class="row">
 
 <label for="Cconducao">nº Carta de Condução</label>
-<input type="number"  class="" id="Cconducao">
+<input type="number"  class="form-control" id="Cconducao">
 
 <label for="dob">Data de Nascimento</label>
-<input type="date" class="" id="dob">
-
+<input type="date" class="form-control" id="dob">
+</div>
 
 <label for="gen">Género</label>
 <label for="mas">Masculino</label>
@@ -47,20 +50,28 @@ foreach($_POST as $chave => $valor){
 
 
 <select name="concelho">
+ 
     <?php
+    
+ $freguesia = getConcelhos();
+ if($freguesia > 0 ){
+     foreach($freguesia as $valor ){
+         echo "<option value" . $valor['codigo'] . ">". $valor['nome'] . "</option>" ; 
+     }
+  
+    
 
-        //foreach()
-        //echo 
+ }
 
 
-    ?>
+?>
+
+
+
 </select>
 
 <select name="freguesia">
-    <?php
-
-
-       ?>
+   
 </select>
 
 
@@ -69,9 +80,6 @@ foreach($_POST as $chave => $valor){
 
 
 </div>
-
-
-
 
 
 
