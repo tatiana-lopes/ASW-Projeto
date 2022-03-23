@@ -16,7 +16,7 @@ Torres Vedras Lisboa
 Vila Franca de Xira Lisboa
 
 INSERT INTO 
-	Conelho(codigo, nome )
+	Concelho(codigo, nome )
 VALUES
 	('1101', 'Alenquer'),
 	('1115', 'Amadora'),
