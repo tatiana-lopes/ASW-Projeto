@@ -1,6 +1,6 @@
 <?php ?>
     <footer class="page-footer font-small bg-primary bg-gradient pt-4 mt-5">
-
+<!-- coco-->
 <!-- Grid container -->
 <div class="container p-4">
 <!-- Section: Social media -->
