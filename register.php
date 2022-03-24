@@ -1,10 +1,13 @@
 <?php
 require_once 'functions/database.php';
+$username;
+$password;
+$errorName=false;
 
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 if(!isset($_POST)){
-//erro
+//fazer todas as verificações de se os dados estão corretos e tratar os mesmos
 
 }
 
@@ -18,7 +21,12 @@ if(!isset($_POST)){
 <div class="col"> 
 <label for="nome">Nome</label>
 <input type="text" class="form-control" id="nome">
-
+<?php
+// podemmos personalisar melhor cada erro , cada mensagem e cada acção
+if($errorName){
+    echo '<label for "nome>' . "Erro no nome tal tal tal </label>";
+}
+?>
 <label for="email">Email</label>
 <input type="text"  class="form-control" id="email">
 </div>
