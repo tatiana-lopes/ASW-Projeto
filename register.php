@@ -1,12 +1,28 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 require_once 'functions/database.php';
-$username;
-$password;
-$errorName=false;
+$tipo_Registro;
+$erros = array();
+$missing = array();
+
+// caro queiramos usar uma pagina para todos os registros
+if(isset($_GET['registar']) == "voluntario"){
+
+} elseif ($_GET['registar'] == "instituto"){
+
+}else{
+header('location: /index.php');
+exit;
+}
 
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-if(!isset($_POST)){
+if(isset($_POST['send'])){
+$dadosEsperados = ['nome','email','password'];   // por todos os dados esperados;
+$dadosRequeridos = ['nome','password'];   // por dados os quais sem eles não é possivel fazer registro
 //fazer todas as verificações de se os dados estão corretos e tratar os mesmos
 
 }
@@ -16,18 +32,42 @@ if(!isset($_POST)){
 ?>
 
 <article class="form-group container">
+
+<!--  verificar se existem erros ou dados em falta -->
+
+<?php if ($erros || $missing): ?>
+<p>Registro Invalido, por favor corrija os dados</p>
+<?php endif; ?>
 <div class="row">
-<form action="" method="post">
+
+
+
+<form action="/registe.php" method="post" id="registro">
+
+
 <div class="col"> 
-<label for="nome">Nome</label>
+
+<!--  verificar se esta em falta o nome -->
+
+
+<label for="nome">Nome:
+<?php if (in_array('nome', $missing)): ?>
+<span>Insere o teu nome</span>   <!--  Criar uma class Style para mensagens em erro -->
+<?php endif; ?>
+</label>
 <input type="text" class="form-control" id="nome">
 <?php
 // podemmos personalisar melhor cada erro , cada mensagem e cada acção
-if($errorName){
-    echo '<label for "nome>' . "Erro no nome tal tal tal </label>";
-}
 ?>
-<label for="email">Email</label>
+<label for="email">Email:
+    <?php if (in_array('email', $missing)): ?>
+<span>Insere o teu email</span>   <!--  Criar uma class Style para mensagens em erro -->
+<?php endif; ?>
+<?php if (in_array('email', $erros)): ?>
+<span>Erro email invalido</span>   <!--  Criar uma class Style para mensagens em erro -->
+<?php endif; ?>
+</label>
+</label>
 <input type="text"  class="form-control" id="email">
 </div>
 <div class="col">
@@ -85,7 +125,7 @@ if($errorName){
 
 </form>
 
-
+<button type="submit" form="registro" value="Submit">Registar</button>
 
 </div>
 

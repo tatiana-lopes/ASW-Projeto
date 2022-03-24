@@ -42,10 +42,10 @@
             <p class="text-center fw-bold mx-3 mb-0 text-muted ">OU</p>
           </div>
 
-          <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="./index.php?page=registerInst" role="button">
+          <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="./index.php?page=register&registar=voluntario" role="button">
             Registar Instituição
           </a>
-          <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="./index.php?page=register" role="button">
+          <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="./index.php?page=register&registar=instituto" role="button">
            Registar Voluntário</a>
 
         </form>
