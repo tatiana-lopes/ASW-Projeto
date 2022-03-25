@@ -102,7 +102,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <tr>
 <td>
 <label for="nome">Nome:
-<?php if (in_array('name', $missing)) 
+<?php if (in_array('name', $missing) ) 
         echo " Nome em falta";?>
 </label>
 <input type="text" class="form-control col-xs-4" name="nome" id="nome" value="<?php if(isset($_POST['nome'])) echo $_POST['nome'] ?>  " >

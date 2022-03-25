@@ -19,7 +19,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           $login = loginUser($email,$password);
               if(!($login == NULL)){
                  session_start();
-                 $usuário = $login;
+                 $_SESSION['username'] = $login;
+                 
             /// redirecionar para outra pagina, temos de arranjar forma de permanecer com login
 
               }else{
