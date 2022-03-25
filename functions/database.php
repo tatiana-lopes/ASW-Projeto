@@ -182,25 +182,19 @@ return $column;
   }
 
   
-function RegisterVoluntario($username,$password ){  // POR O RESTO DOS DADOS NECESSARIOS
+function RegisterVoluntario($dados ){  // POR O RESTO DOS DADOS NECESSARIOS
   $conn = getConnection();
-  $query = "SELECT * FROM Concelho"; // VAI TER DE SER UM INSERT COM OS DADOS RECEBIDOS
-  $result = mysqli_query($conn,$query);
+  $query = "ISERT INTO Concelho"; // VAI TER DE SER UM INSERT COM OS DADOS RECEBIDOS
+
+  $query += "values(?????????????) " . $dados['name'] . $dados['password'] . $dados['cc']; 
   
+
   
-  if (mysqli_num_rows($result) > 0) {
-    $column = array();
-    foreach($result as $key => $value){
-      $column[$key] = $value;
-    }
 
 
-  } else {
-    echo "0 results";
-  }
-mysqli_close($conn);
-return $column;
-  }   // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
+  }   
+  
+  // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
   function RegisterInstitution($username,$password ){  // POR O RESTO DOS DADOS NECESSARIOS
     $conn = getConnection();
     $query = "INSET INTO * FROM Concelho"; // VAI TER DE SER UM INSERT COM OS DADOS RECEBIDOS
@@ -242,4 +236,19 @@ return $column;
       }   // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
     
 
+      function loginUser($username, $password){
+        $conn = getConnection();
+        $query = "SELECT * FROM Usuarios WHERE Usuarios.email = ".$username ;
+
+        $result = mysqli_query($conn,$query);
+        $user = mysqli_fetch_assoc($result);
+        if($user['email'] == $username && $user['password']== $password){
+          return $user['id'];
+        }else{
+          return NULL;
+        }
+
+        
+
+      }
 ?>
