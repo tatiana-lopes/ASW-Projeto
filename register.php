@@ -1,9 +1,9 @@
 <?php
-
+require_once 'functions/database.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require_once 'functions/database.php';
+
 $tipo_Registro;
 $erros = array();
 $missing = array();
@@ -42,7 +42,7 @@ $dadosRequeridos = ['nome','password'];   // por dados os quais sem eles não é
 
 
 
-<form action="/registe.php" method="post" id="registro">
+<form action="/register.php" method="post" id="registro">
 
 
 <div class="col"> 
@@ -60,9 +60,8 @@ $dadosRequeridos = ['nome','password'];   // por dados os quais sem eles não é
 // podemmos personalisar melhor cada erro , cada mensagem e cada acção
 ?>
 <label for="email">Email:
-    <?php if (in_array('email', $missing)): ?>
-<span>Insere o teu email</span>   <!--  Criar uma class Style para mensagens em erro -->
-<?php endif; ?>
+  
+
 <?php if (in_array('email', $erros)): ?>
 <span>Erro email invalido</span>   <!--  Criar uma class Style para mensagens em erro -->
 <?php endif; ?>
@@ -119,7 +118,20 @@ $dadosRequeridos = ['nome','password'];   // por dados os quais sem eles não é
 </select>
 
 <select name="freguesia">
+<?php
+    
+    $freguesia = getFreguesias();
+    if($freguesia > 0 ){
+        foreach($freguesia as $valor ){
+            echo "<option value" . $valor['codigo'] . ">". $valor['nome'] . "</option>" ; 
+        }
+     
+       
    
+    }
+   
+   
+   ?> 
 </select>
 
 

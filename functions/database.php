@@ -16,10 +16,21 @@ function getConnection(){
   
 function getFreguesias(){
 $conn = getConnection();
-$query = "SELECT * FROM Freguesia";;
+$query = "SELECT * FROM Freguesia";
 $result = mysqli_query($conn,$query);
 
   $data[]= mysqli_fetch_assoc($result);
+  
+  if (mysqli_num_rows($result) > 0) {
+    $column = array();
+    foreach($result as $key => $value){
+      $column[$key] = $value;
+    }
+
+
+  } else {
+    echo "0 results";
+  }
 
 mysqli_close($conn);
 return $data;
@@ -48,7 +59,7 @@ return $column;
   
 function getAllUsers(){
   $conn = getConnection();
-  $query = "SELECT * FROM Concelho";;
+  $query = "SELECT * FROM Utilizador";;
   $result = mysqli_query($conn,$query);
   
   
@@ -69,7 +80,7 @@ return $column;
   
 function getAllVolunters(){
   $conn = getConnection();
-  $query = "SELECT * FROM Concelho";;
+  $query = "SELECT * FROM Voluntarios";;
   $result = mysqli_query($conn,$query);
   
   
@@ -90,7 +101,7 @@ return $column;
 
   function getAllInstitutions(){
     $conn = getConnection();
-    $query = "SELECT * FROM Concelho";;
+    $query = "SELECT * FROM Instituicao";;
     $result = mysqli_query($conn,$query);
     
     
@@ -152,7 +163,7 @@ return $column;
   
 function getDonationByInstitute($id){
   $conn = getConnection();
-  $query = "SELECT * FROM Concelho";;
+  $query = "SELECT * FROM Instituicao WHERE id_U = ". $id ;
   $result = mysqli_query($conn,$query);
   
   
@@ -164,7 +175,7 @@ function getDonationByInstitute($id){
 
 
   } else {
-    echo "0 results";
+    echo "Não existe Instituição com id". $id;
   }
 mysqli_close($conn);
 return $column;
