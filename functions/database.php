@@ -179,8 +179,8 @@ mysqli_close($conn);
 return $column;
   }
 
-  
-function RegisterVoluntario($email, $tipo, $telefone, $pass, $nome, $codigo_concelho, $codigo_freguesia, $id_U, $cc, $carta_conducao, $genero, $dob, $imgPath  ){  // POR O RESTO DOS DADOS NECESSARIOS
+/*
+function RegisterVoluntario1($email, $tipo, $telefone, $pass, $nome, $codigo_concelho, $codigo_freguesia, $id_U, $cc, $carta_conducao, $genero, $dob, $imgPath  ){  // POR O RESTO DOS DADOS NECESSARIOS
   $conn = getConnection();
   $query = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_concelho, codigo_freguesia)";
   $query += "VALUES ( " . $email['email'] . "," . $tipo['tipo'] . "," .  $nome['nome'] . "," .  $codigo_concelho['codigo_concelho'] . "," .  $codigo_freguesia['codigo_freguesia'] . ");"; 
@@ -201,7 +201,7 @@ function RegisterVoluntario($email, $tipo, $telefone, $pass, $nome, $codigo_conc
   }   // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
 
 
-  function RegisterInstitution($email, $tipo, $telefone, $pass, $nome, $codigo_concelho, $codigo_freguesia, $id_U, $tipo_Inst, $descricao, $morada, $n_contacto, $nome_contacto ){  // POR O RESTO DOS DADOS NECESSARIOS
+  function RegisterInstitution1($email, $tipo, $telefone, $pass, $nome, $codigo_concelho, $codigo_freguesia, $id_U, $tipo_Inst, $descricao, $morada, $n_contacto, $nome_contacto ){  // POR O RESTO DOS DADOS NECESSARIOS
     $conn = getConnection();
     $query = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_concelho, codigo_freguesia)";
     $query += "VALUES ( " . $email['email'] . "," . $tipo['tipo'] . "," .  $nome['nome'] . "," .  $codigo_concelho['codigo_concelho'] . "," .  $codigo_freguesia['codigo_freguesia'] . ");"; 
@@ -222,6 +222,45 @@ function RegisterVoluntario($email, $tipo, $telefone, $pass, $nome, $codigo_conc
     
 
     }   // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
+ */
+    
+   function RegisterVoluntario($dados){  // POR O RESTO DOS DADOS NECESSARIOS
+      $conn = getConnection();
+      $query = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_concelho, codigo_freguesia) VALUES ( " . $dados['email'] . "," . $dados['tipo'] . "," .  $dados['nome'] . "," .  $dados['codigo_concelho'] . "," .  $dados['codigo_freguesia'] . ");"; 
+      $query .= "INSERT INTO Voluntario (id_U, cc, carta_conducao, genero, dob, imgPath) VALUES ( " . $dados['id_U'] . "," .  $dados['cc'] . "," . $dados['carta_conducao'] . "," . $dados['genero'] . "," . $dados['dob'] . "," . $dados['imgPath'] . ");"; 
+        
+      $result = mysqli_query($conn,$query);
+    
+      if ($result) {
+        echo "Um novo registo inserido com sucesso";
+        mysqli_close($conn);
+        return True;
+      } else {
+        echo "Erro: insert failed" . $query . "<br>" . mysqli_error($conn);
+        mysqli_close($conn);
+        return False;
+      }
+      }   // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
+  
+
+    function RegisterInstitution($dados){  // POR O RESTO DOS DADOS NECESSARIOS
+      $conn = getConnection();
+      $query = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_concelho, codigo_freguesia) VALUES ( " . $dados['email'] . "," . $dados['tipo'] . "," .  $dados['nome'] . "," .  $dados['codigo_concelho'] . "," .  $dados['codigo_freguesia'] . ");"; 
+      $query .= "INSERT INTO Instituicao (id_U, tipo, descricao, morada, n_contacto, nome_contacto) VALUES ( " . $dados['id_U'] . "," .  $dados['tipo'] . "," . $dados['descricao'] . "," . $dados['morada'] . "," . $dados['n_contacto'] . "," . $dados['nome_contacto'] . ");"; 
+  
+      $result = mysqli_query($conn,$query);
+      
+      if ($result) {
+        echo "Um novo registo inserido com sucesso";
+        mysqli_close($conn);
+        return True;
+      } else {
+        echo "Erro: insert failed" . $query . "<br>" . mysqli_error($conn);
+        mysqli_close($conn);
+        return False;
+      }
+      }   // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
+
   
 function addDonation($idInstitute,$name ){  // POR O RESTO DOS DADOS NECESSARIOS
       $conn = getConnection();
