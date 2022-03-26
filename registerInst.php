@@ -47,7 +47,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($_POST['description'])){
         array_push($missing ,"contatoR");
     }
+
+    if(empty($_POST['c_distrito'])){
+        array_push($missing ,"c_distrito");
+     }
+
+     if(empty($_POST['c_concelho'])){
+        array_push($missing ,"c_concelho");
+     }
+
+     if(empty($_POST['c_freguesia'])){
+        array_push($missing ,"c_freguesia");
+     }
     
+     
     // se não houver erros ou valores vazios
     if(!empty($missing) && !empty($erros)){
     $dados = array();
