@@ -220,7 +220,7 @@ function RegisterVoluntario1($email, $tipo, $telefone, $pass, $nome, $codigo_con
 function RegisterVoluntario($dados)
 {  // POR O RESTO DOS DADOS NECESSARIOS
   $conn = getConnection();
-  $query = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_concelho, codigo_freguesia) VALUES ( " . $dados['email'] . "," . $dados['tipo'] . "," .  $dados['nome'] . "," .  $dados['codigo_concelho'] . "," .  $dados['codigo_freguesia'] . ");";
+  $query = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_distrito, codigo_concelho, codigo_freguesia) VALUES ( " . $dados['email'] . "," . $dados['tipo'] . "," .  $dados['nome'] . "," . $dados['codigo_distrito']  . "," .  $dados['codigo_concelho'] . "," .  $dados['codigo_freguesia'] . ");";
   $query .= "INSERT INTO Voluntario (id_U, cc, carta_conducao, genero, dob, imgPath) VALUES ( " . $dados['id_U'] . "," .  $dados['cc'] . "," . $dados['carta_conducao'] . "," . $dados['genero'] . "," . $dados['dob'] . "," . $dados['imgPath'] . ");";
 
   $result = mysqli_query($conn, $query);
@@ -240,7 +240,7 @@ function RegisterVoluntario($dados)
 function RegisterInstitution($dados)
 {  // POR O RESTO DOS DADOS NECESSARIOS
   $conn = getConnection();
-  $query = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_concelho, codigo_freguesia) VALUES ( " . $dados['email'] . "," . $dados['tipo'] . "," .  $dados['nome'] . "," .  $dados['codigo_concelho'] . "," .  $dados['codigo_freguesia'] . ");";
+  $query = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_distrito, codigo_concelho, codigo_freguesia) VALUES ( " . $dados['email'] . "," . $dados['tipo'] . "," .  $dados['nome'] . "," . $dados['codigo_distrito']  . "," .  $dados['codigo_concelho'] . "," .  $dados['codigo_freguesia'] . ");";
   $query .= "INSERT INTO Instituicao (id_U, tipo, descricao, morada, n_contacto, nome_contacto) VALUES ( " . $dados['id_U'] . "," .  $dados['tipo'] . "," . $dados['descricao'] . "," . $dados['morada'] . "," . $dados['n_contacto'] . "," . $dados['nome_contacto'] . ");";
 
   $result = mysqli_query($conn, $query);
@@ -279,7 +279,7 @@ function addDonation($idInstitute, $name)
 function loginUser($username, $password)
 {
   $conn = getConnection();
-  $query = "SELECT * FROM Usuarios WHERE Usuarios.email = " . $username;
+  $query = "SELECT * FROM Usuarios WHERE email = " . $username;
 
   $result = mysqli_query($conn, $query);
   $user = mysqli_fetch_assoc($result);
