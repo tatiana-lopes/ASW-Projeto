@@ -238,17 +238,61 @@ function RegisterVoluntario($dados ){  // POR O RESTO DOS DADOS NECESSARIOS
 
       function loginUser($username, $password){
         $conn = getConnection();
-        $query = "SELECT * FROM Usuarios WHERE Usuarios.email = ".$username ;
+        $query = "SELECT * FROM Voluntario WHERE Voluntario.email = ".$username ;
+        $result = mysqli_query($conn,$query);
+        if (mysqli_num_rows($result) > 0) {
+          $_SESSION['tipo'] = "Voluntario";
+          $user = mysqli_fetch_assoc($result);
+            if($user['password'] === $password['pass']){
+              $_SESSION['tipo'] = "Voluntario";
+              $_SESSION['user'] = $result['nome'];
+              $_SESSION['id'] = md5($result['id']);
+            }
+        }
+ 
+        
+
 
         $result = mysqli_query($conn,$query);
         $user = mysqli_fetch_assoc($result);
-        if($user['email'] == $username && $user['password']== $password){
+        if($user['email'] == $username && $user['password']== $password){       // verificar query
           return $user['id'];
         }else{
           return NULL;
         }
+        
+        
 
         
 
       }
+
+      function userExistsByEmail($email){
+        $conn = getConnection();
+        $query = "SELECT * FROM Usuarios WHERE Usuarios.email = ".$email ; // verificar query
+
+        $result = mysqli_query($conn,$query);
+           
+        if (mysqli_num_rows($result) > 0) {
+         return 0;
+          }else{
+           return 1;
+          }
+
+      }
+      function userExistsByCondC($conducao){
+        $conn = getConnection();
+        $query = "SELECT * FROM Voluntario WHERE Voluntario.conducao = ".$conducao ;  // verificar query
+
+        $result = mysqli_query($conn,$query);
+     
+        if (mysqli_num_rows($result) > 0) {
+         return 0;
+          }else{
+           return 1;
+          }
+
+
+      }
+      
 ?>
