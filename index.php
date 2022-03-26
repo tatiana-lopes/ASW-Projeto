@@ -8,15 +8,10 @@ $LocalDirectory = dirname(__FILE__);
 if (!isset($_SESSION)) session_start();
 
 
-if(isset($_SESSION['username'])){
-
-
-}
-
 require_once  './config/init.php';
 
 include_once  './config/settings.php';
-include_once  './function.php';
+include  './function.php';
 
 if(isset($_GET['page'])){
 $content = changePage($_GET['page']);

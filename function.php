@@ -10,6 +10,14 @@ function changePage( $page){
         return $content;
 }
 
+function checkLogin(){
+$tipo = NULL;    
+if(isset($_SESSION['tipo']) && isset($_SESSION['tipo']) && isset($_SESSION['tipo'])){
+$tipo = $_SESSION['tipo'];
 
+}
+return $tipo;
+
+}
 
 ?>

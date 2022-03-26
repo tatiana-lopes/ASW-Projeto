@@ -56,7 +56,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <img src="./img/volunteer.png" class="img-fluid" alt="voluntariado">
       </div>
       <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-        <form action="" method="POST">
+        <form action="" name="loginUser" method="POST">
         <?php if (isset($loginError)){ echo "
   <p>Dados de Login Inválidos</p>";}
  ?>
@@ -88,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           </div>
 
           <!-- Submit button -->
-          <button type="submit" name="login" class="btn btn-primary btn-lg btn-block">Entrar</button>
+          <button type="submit" form="loginUser" name="login" class="btn btn-primary btn-lg btn-block">Entrar</button>
 
           <div class="divider d-flex align-items-center my-4">
             <p class="text-center fw-bold mx-3 mb-0 text-muted ">OU</p>

@@ -1,4 +1,9 @@
 <?php
+//if(isset($_SESSION['tipo'])&& isset($_SESSION['id'] && isset($_SESSION['']) 
+
+
+
+
 ?>
 <body>
     <div class="container-fluid">

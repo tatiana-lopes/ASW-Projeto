@@ -6,6 +6,11 @@ CREATE TABLE Utilizador (
     codigo_concelho NUMERIC(3) NOT NULL,
     codigo_freguesia NUMERIC(3) NOT NULL
 );
+CREATE TABLE Admin (
+    username VARCHAR(20) PRIMARY KEY,
+    password VARCHAR(100) NOT NULL,
+    lastLogin TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+);
 
 
 CREATE TABLE Instituicao (
