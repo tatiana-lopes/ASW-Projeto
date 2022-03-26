@@ -3,7 +3,7 @@
     <article class="row mt-5">
     <div class="col ml-5">
         
-    <h1>Index</h1>
+    <h1>Login</h1>
     <form>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email address</label>

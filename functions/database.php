@@ -1,6 +1,6 @@
 <?php
 define('DB_SERVIDOR','localhost');
-define('DB_NOME', 'FCULREFOOD');
+define('DB_NOME', 'asw09');
 define('DB_USUARIO', 'asw09');
 define('DB_PASSWORD','aswgrupo09');
 function getConnection(){
@@ -195,7 +195,7 @@ function RegisterVoluntario($dados ){  // POR O RESTO DOS DADOS NECESSARIOS
   }   
   
   // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
-  function RegisterInstitution($username,$password ){  // POR O RESTO DOS DADOS NECESSARIOS
+  function RegisterInstitution($username,$password){  // POR O RESTO DOS DADOS NECESSARIOS
     $conn = getConnection();
     $query = "INSET INTO * FROM Concelho"; // VAI TER DE SER UM INSERT COM OS DADOS RECEBIDOS
     $result = mysqli_query($conn,$query);
