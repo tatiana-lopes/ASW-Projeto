@@ -7,27 +7,77 @@ error_reporting(E_ALL);
 $tipo_Registro;
 $erros = array();
 $missing = array();
-
-// caro queiramos usar uma pagina para todos os registros
-if(isset($_GET['registar']) == "voluntario"){
-
-} elseif ($_GET['registar'] == "instituto"){
-
-}else{
-header('location: /index.php');
-exit;
-}
+$errorMsg = array();
 
 
+//Caso tenha sido feito um pedido Post
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-if(isset($_POST['send'])){
-$dadosEsperados = ['nome','email','password'];   // por todos os dados esperados;
-$dadosRequeridos = ['nome','password'];   // por dados os quais sem eles não é possivel fazer registro
-//fazer todas as verificações de se os dados estão corretos e tratar os mesmos
+    // e caso a variavel submit esteja assignada
+    if(isset($_POST['submit'])){
 
+   // e caso a variavel name não esteja assignada
+    if(empty($_POST['nome'])){
+    array_push($missing, 'nome');    
+    
+    }   
+      // e caso a variavel passwor não  esteja assignada
+    if(empty($_POST['password'])){
+    array_push($missing ,"password");
+    }
+      // e caso a variavel email não esteja assignada
+    if(empty($_POST['email'])){
+        array_push($missing ,"email");
+   }   
+     // e caso a variavel cc não esteja assignada
+    if(empty($_POST['cc'])){
+       array_push($missing ,"cc");
+    }
+     // e caso a variavel Cconducao não esteja assignada
+    if(empty($_POST['Cconducao'])){
+        array_push($missing ,"Cconducao");
+    } 
+       // e caso a variavel gen não esteja assignada
+    if(empty($_POST['gen'])){
+        array_push($missing ,"gen");
+    }
+       // e caso a variavel gen não esteja assignada
+    if(empty($_POST['gen'])){
+        array_push($missing ,"gen");
+    }
+    
+    // se não houver erros ou valores vazios
+    if(!empty($missing) && !empty($erros)){
+    $dados = array();
+    //para cada valor do pos tratar e adicionar a uma array associativa
+    foreach($_POST as $key =>$value){
+     $valor = htmlspecialchars($value);
+     $valor = stripcslashes($valor);
+     array_push($dados[$key],$valor);
+    }
+    // fazer chamada a função para registar
+    $result = RegisterVoluntario($dados);
+        if($result){
+            //caso o resultado seja positivo ir para o index
+             header('Location: index.php');
+                 die();
+
+          }else{
+              //caso contrario adicionar a array erros
+        $erros['submit'] = TRUE;
+
+        }
+    
+
+    }
+    
+
+
+
+
+    }
 }
 
-}
+
 
 ?>
 
@@ -35,58 +85,85 @@ $dadosRequeridos = ['nome','password'];   // por dados os quais sem eles não é
 
 <!--  verificar se existem erros ou dados em falta -->
 
-<?php if ($erros || $missing): ?>
-<p>Registro Invalido, por favor corrija os dados</p>
-<?php endif; ?>
-<div class="row">
+<?php if (count($erros) >0  || count($missing) >0){ echo "
+<p>Registro Invalido, por favor corrija os dados</p>";}
+ ?>
+<div class="row justify-content-center">
+
+
+<table style="width:80%" class="">
+<form action="" method="POST" id="registro" >
 
 
 
-<form action="/register.php" method="post" id="registro">
-
-
-<div class="col"> 
 
 <!--  verificar se esta em falta o nome -->
 
-
+<tr>
+<td>
 <label for="nome">Nome:
-<?php if (in_array('nome', $missing)): ?>
-<span>Insere o teu nome</span>   <!--  Criar uma class Style para mensagens em erro -->
-<?php endif; ?>
+<?php if (in_array('name', $missing) ) 
+        echo " Nome em falta";?>
 </label>
-<input type="text" class="form-control" id="nome">
-<?php
-// podemmos personalisar melhor cada erro , cada mensagem e cada acção
-?>
+<input type="text" class="form-control col-xs-4" name="nome" id="nome" value="<?php if(isset($_POST['nome'])) echo $_POST['nome'] ?>  " >
+</td>
+<td style="width:10%"></td>
+<td>
 <label for="email">Email:
   
 
-<?php if (in_array('email', $erros)): ?>
-<span>Erro email invalido</span>   <!--  Criar uma class Style para mensagens em erro -->
-<?php endif; ?>
 </label>
+<input type="text"  class="form-control" id="email" name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email'] ?> ">
+<span class="help-block"> <?php  // texto de ajuda ou aviso)?> </span>
+</td>
+</tr>
+<tr>
+
+  <td>
+<label for="password">Password: 
+    <?php if (in_array('email', $missing)) echo "Por favor insira a sua Password;" ?>
+
+</label>    
+<input type="password"  class="form-control" name="password" id="password">
+  </td>
+  <td style="width:10%"></td>
+  <td>
+<label for="password2">Repita sua Password: 
+    <?php if (in_array('email', $missing)) echo "Por favor insira a sua Password;" ?>
 </label>
-<input type="text"  class="form-control" id="email">
-</div>
-<div class="col">
-  
-<label for="password">Password</label>
-<input type="number"  class="form-control" id="password">
+<input type="password"  class="form-control" name="password2" id="password2">
+  </td>
+</tr>
+<tr>
+<td>
+<label for="cc">nº Cartão de Cidadão
+<?php if (in_array('email', $missing)) echo "Por favor insira a sua Password;" ?>
 
-<label for="cc">nº Cartão de Cidadão</label>
-<input type="number"  class="form-control" id="cc">  
-</div>
-</div>
-<div class="row">
 
-<label for="Cconducao">nº Carta de Condução</label>
-<input type="number"  class="form-control" id="Cconducao">
+</label>
+<input type="number"  class="form-control" name="cc" id="cc">  
 
-<label for="dob">Data de Nascimento</label>
-<input type="date" class="form-control" id="dob">
-</div>
 
+</td>
+<td>
+
+<label for="Cconducao">nº Carta de Condução
+<?php if (in_array('email', $missing)) echo "Por favor insira a sua Password;" ?>
+
+
+</label>
+<input type="number"  class="form-control" name="Cconducao" id="Cconducao">
+</td>
+<td>
+<label for="dob">Data de Nascimento
+<?php if (in_array('email', $missing)) echo "Por favor insira a sua Password;" ?>
+
+</label>
+<input type="date" class="form-control" name="dob" id="dob">
+</td>
+</tr>
+<tr>
+<td>
 <label for="gen">Género</label>
 <label for="mas">Masculino</label>
 <input type="radio" name="gen" class="" id="mas" value="masculino">
@@ -94,8 +171,9 @@ $dadosRequeridos = ['nome','password'];   // por dados os quais sem eles não é
 <input type="radio" name="gen" class="" id="fem" value="feminino" >
 <label for="out">Outro</label>
 <input type="radio" name="gen" class="" id="out" value="outro" >
-
-
+<?php if (in_array('email', $missing)) echo "<p>Por favor insira a sua Password;</p>" ?>
+</td>
+<td>
 <select name="concelho">
  
     <?php
@@ -116,7 +194,8 @@ $dadosRequeridos = ['nome','password'];   // por dados os quais sem eles não é
 
 
 </select>
-
+</td>
+<td>
 <select name="freguesia">
 <?php
     
@@ -133,11 +212,20 @@ $dadosRequeridos = ['nome','password'];   // por dados os quais sem eles não é
    
    ?> 
 </select>
-
-
+</td>
+</tr>
 </form>
-
-<button type="submit" form="registro" value="Submit">Registar</button>
+<tr>
+    <td>
+        
+    </td>
+    <td>
+    </td>
+    <td>
+<button type="submit" form="registro" name="submit" value="submit">Registar</button>
+    </td>
+</tr>
+</table>
 
 </div>
 

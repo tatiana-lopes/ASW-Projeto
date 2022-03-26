@@ -3,7 +3,7 @@
     
 <article class="container">
     <p>
-    <div class="col ml-5 mx-auto">
+    <div class="col ml-5 mx-auto form-grou form-inline">
   
     <h1>Registar</h1>
     <form class="row g-3">
@@ -11,11 +11,11 @@
     <label for="inputEmail4" class="form-label">Email</label>
     <input type="email" class="form-control" id="inputEmail4">
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6 ">
     <label for="inputPassword4" class="form-label">Password</label>
     <input type="password" class="form-control" id="inputPassword4">
   </div>
-  <fieldset class="col-md-4">
+  <fieldset class="col-md-4 form-inline">
  
     <label for="inputState" class="form-label">Concelho</label>
     <select id="inputState" class="form-select">
@@ -28,7 +28,7 @@
     <input type="text" class="form-control" id="inputZip">
   </div>
   </fieldset>
-  <div class="col-md-2">
+  <div class="col-md-2 form-inline">
   <label for="dob" class="form-label">Data de nascimento </label>
   <input id="dob" class="form-control" type="date">
   </div>
