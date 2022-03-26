@@ -236,36 +236,23 @@ function RegisterVoluntario($dados ){  // POR O RESTO DOS DADOS NECESSARIOS
       }   // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
     
 
-      function loginUser($username, $password){
+      function loginUser($email, $password){
         $conn = getConnection();
-        $query = "SELECT * FROM Voluntario WHERE Voluntario.email = ".$username ;
+        $query = "SELECT * FROM Utilizador WHERE email = ".$email ;
         $result = mysqli_query($conn,$query);
+        $loginState= false;
         if (mysqli_num_rows($result) > 0) {
-          $_SESSION['tipo'] = "Voluntario";
           $user = mysqli_fetch_assoc($result);
-            if($user['password'] === $password['pass']){
-              $_SESSION['tipo'] = "Voluntario";
-              $_SESSION['user'] = $result['nome'];
-              $_SESSION['id'] = md5($result['id']);
+            if($user['password'] === $password){ // caso as passwords sejam iguais , criar uma sessão em que
+              $_SESSION['tipo'] = $user['tipo'];          // é declarado um voluntário e é dado o seu nome e id encriptado
+              $_SESSION['user'] = $user['nome'];      // o id encriptado sera usado para ir a sua pagina de preferencias 
+              $_SESSION['id'] = md5($user['id']);
+              $loginState = true;
             }
         }
- 
-        
 
-
-        $result = mysqli_query($conn,$query);
-        $user = mysqli_fetch_assoc($result);
-        if($user['email'] == $username && $user['password']== $password){       // verificar query
-          return $user['id'];
-        }else{
-          return NULL;
-        }
-        
-        
-
-        
-
-      }
+        return $loginState;
+    }
 
       function userExistsByEmail($email){
         $conn = getConnection();

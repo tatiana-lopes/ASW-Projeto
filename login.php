@@ -14,15 +14,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           $email = htmlspecialchars($_POST['email']);
           $email = strip_tags($email);
 
-          $password = crypt($_POST['password'] ,CRYPT_MD5);
+          $password = md5($_POST['password']);
           
           $login = loginUser($email,$password);
-              if(!($login == NULL)){
+              if($login){
                  session_start();
-                 $_SESSION['username'] = $login['email'];
-                 $_SESSION['nome']= $login['nome'];
-                 $_SESSION['id'] =  $login['id'];
-
+                 header('Location: index.php');
                  
             /// redirecionar para outra pagina, temos de arranjar forma de permanecer com login
 
@@ -97,10 +94,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <p class="text-center fw-bold mx-3 mb-0 text-muted ">OU</p>
           </div>
 
-          <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="./index.php?page=register" role="button">
+          <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="./index.php?page=registerInst" role="button">
             Registar Instituição
           </a>
-          <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="./index.php?page=registerInst" role="button">
+          <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="./index.php?page=register" role="button">
            Registar Voluntário</a>
 
         </form>
