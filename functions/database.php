@@ -172,8 +172,6 @@ function getDonationByInstitute($id){
     foreach($result as $key => $value){
       $column[$key] = $value;
     }
-
-
   } else {
     echo "Não existe Instituição com id". $id;
   }
@@ -182,71 +180,78 @@ return $column;
   }
 
   
-function RegisterVoluntario($dados ){  // POR O RESTO DOS DADOS NECESSARIOS
+function RegisterVoluntario($email, $tipo, $telefone, $pass, $nome, $codigo_concelho, $codigo_freguesia, $id_U, $cc, $carta_conducao, $genero, $dob, $imgPath  ){  // POR O RESTO DOS DADOS NECESSARIOS
   $conn = getConnection();
-  $query = "ISERT INTO Concelho"; // VAI TER DE SER UM INSERT COM OS DADOS RECEBIDOS
+  $query = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_concelho, codigo_freguesia)";
+  $query += "VALUES ( " . $email['email'] . "," . $tipo['tipo'] . "," .  $nome['nome'] . "," .  $codigo_concelho['codigo_concelho'] . "," .  $codigo_freguesia['codigo_freguesia'] . ");"; 
+  $query += "INSERT INTO Voluntario (id_U, cc, carta_conducao, genero, dob, imgPath)
+              VALUES ( " . $id_U['id_U'] . "," .  $cc['cc'] . "," . $carta_conducao['carta_conducao'] . "," . $genero['genero'] . "," . $dob['dob'] . "," . $imgPath['imgPath'] . ");"; 
+    
+  $result = mysqli_query($conn,$query);
 
-  $query += "values(?????????????) " . $dados['name'] . $dados['password'] . $dados['cc']; 
-  
+  if ($result) {
+    echo "Um novo registo inserido com sucesso";
+    mysqli_close($conn);
+    return True;
+  } else {
+    echo "Erro: insert failed" . $query . "<br>" . mysqli_error($conn);
+    mysqli_close($conn);
+    return False;
+  }
+  }   // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
 
-  
 
-
-  }   
-  
-  // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
-  function RegisterInstitution($username,$password){  // POR O RESTO DOS DADOS NECESSARIOS
+  function RegisterInstitution($email, $tipo, $telefone, $pass, $nome, $codigo_concelho, $codigo_freguesia, $id_U, $tipo_Inst, $descricao, $morada, $n_contacto, $nome_contacto ){  // POR O RESTO DOS DADOS NECESSARIOS
     $conn = getConnection();
-    $query = "INSET INTO * FROM Concelho"; // VAI TER DE SER UM INSERT COM OS DADOS RECEBIDOS
+    $query = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_concelho, codigo_freguesia)";
+    $query += "VALUES ( " . $email['email'] . "," . $tipo['tipo'] . "," .  $nome['nome'] . "," .  $codigo_concelho['codigo_concelho'] . "," .  $codigo_freguesia['codigo_freguesia'] . ");"; 
+    $query += "INSERT INTO Instituicao (id_U, tipo, descricao, morada, n_contacto, nome_contacto) 
+               VALUES ( " . $id_U['id_U'] . "," .  $tipo_Inst['tipo'] . "," . $descricao['descricao'] . "," . $morada['morada'] . "," . $n_contacto['n_contacto'] . "," . $nome_contacto['nome_contacto'] . ");"; 
+
     $result = mysqli_query($conn,$query);
     
-    
-    if (mysqli_num_rows($result) > 0) {
-      $column = array();
-      foreach($result as $key => $value){
-        $column[$key] = $value;
-      }
-  
-  
+    if ($result) {
+      echo "Um novo registo inserido com sucesso";
+      mysqli_close($conn);
+      return True;
     } else {
-      echo "0 results";
+      echo "Erro: insert failed" . $query . "<br>" . mysqli_error($conn);
+      mysqli_close($conn);
+      return False;
     }
-  mysqli_close($conn);
-  return $column;
+    
+
     }   // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
   
-    function addDonation($idInstitute,$name ){  // POR O RESTO DOS DADOS NECESSARIOS
+function addDonation($idInstitute,$name ){  // POR O RESTO DOS DADOS NECESSARIOS
       $conn = getConnection();
       $query = "SELECT * FROM Concelho"; // VAI TER DE SER UM INSERT COM OS DADOS RECEBIDOS
       $result = mysqli_query($conn,$query);
       
       
-      if (mysqli_num_rows($result) > 0) {
-        $column = array();
-        foreach($result as $key => $value){
-          $column[$key] = $value;
-        }
-    
-    
+      if ($result) {
+        echo "Um novo registo inserido com sucesso";
+        mysqli_close($conn);
+        return True;
       } else {
-        echo "0 results";
+        echo "Erro: insert failed" . $query . "<br>" . mysqli_error($conn);
+        mysqli_close($conn);
+        return False;
       }
-    mysqli_close($conn);
-    return $column;
       }   // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
     
 
-      function loginUser($username, $password){
-        $conn = getConnection();
-        $query = "SELECT * FROM Usuarios WHERE Usuarios.email = ".$username ;
+function loginUser($username, $password){
+  $conn = getConnection();
+  $query = "SELECT * FROM Usuarios WHERE Usuarios.email = ".$username ;
 
-        $result = mysqli_query($conn,$query);
-        $user = mysqli_fetch_assoc($result);
-        if($user['email'] == $username && $user['password']== $password){
-          return $user['id'];
-        }else{
-          return NULL;
-        }
+  $result = mysqli_query($conn,$query);
+  $user = mysqli_fetch_assoc($result);
+  if($user['email'] == $username && $user['password']== $password){
+    return $user['id'];
+  }else{
+    return NULL;
+  }
 
         
 
