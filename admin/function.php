@@ -1,9 +1,6 @@
 <?php
 include "database.php";
 
-function isAdmin(){
-
-}
 
 function loginAdmin($user,$pass){
         $conn = getConnection();

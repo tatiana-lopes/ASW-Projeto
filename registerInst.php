@@ -1,5 +1,6 @@
 <?php
-require_once 'functions/database.php';
+
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -182,9 +183,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <div class="form-group">
 
 <label for="description"></label>
-<textarea name="description" cols="20" row="4" value="<?php if(isset($_POST['description'])) echo $_POST['description'] ?>" > Breve descrição sobre a sua Instituição
+<textarea class="form-control" name="description" cols="10" rows="4" value="<?php if(isset($_POST['description'])) echo $_POST['description'] ?>" > Breve descrição sobre a sua Instituição
 </textarea>
 
+</div>
+<div class="form-group">
+    <br>
 <label for="nomeR">Nome Responsavel:
     <?php if (in_array('name', $missing)) 
         echo " Nome em falta";?>
@@ -197,11 +201,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </label>
 <input type="number" class="" id="contatoR" name="contatoR" value="<?php if(isset($_POST['contatoR'])) echo $_POST['contatoR'] ?>">
 </div>
+<div class="custom-file">
 
-</form>
-<div class="form-group">
+    <input type="file" class="custom-file-input" id="customFileLang"  lang="pt">
+    <label class="custom-file-label" for="inputGroupFile03">Foto de perfil</label>
+  </div>
+ 
+  <div class="form-group">
+      <br>
 <button type="submit" form="registro" name="submit" value="submit">Registar</button>
 </div>
+</div>
+</form>
+
 </div>
 
 

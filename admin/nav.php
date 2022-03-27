@@ -30,10 +30,14 @@
     <!-- Dropdown -->
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-        Procurar Voluntarios
+        Pesquisa
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="<?php echo 'search.php' . '?id=' . $_SESSION['id'] . '&search=local'  ?>">Voluntarios Perto</a>
+        <a class="dropdown-item" href="<?php echo 'search.php' .  '&search=local'  ?>">Utilizadores</a>
+        <a class="dropdown-item" href="<?php echo 'search.php' . '?id=' . $_SESSION['id'] . '&search=choose'  ?>">Procurar em Local </a>
+        <a class="dropdown-item" href="<?php echo 'search.php' .  '&search=local'  ?>">Procurar Email</a>
+        <a class="dropdown-item" href="<?php echo 'search.php' . '?id=' . $_SESSION['id'] . '&search=choose'  ?>">Procurar Nome </a>
+        <a class="dropdown-item" href="<?php echo 'search.php' .  '&search=local'  ?>">Procurar Nome</a>
         <a class="dropdown-item" href="<?php echo 'search.php' . '?id=' . $_SESSION['id'] . '&search=choose'  ?>">Voluntarios por Local </a>
       </div>
     </li>

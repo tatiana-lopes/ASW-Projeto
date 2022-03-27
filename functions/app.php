@@ -1,4 +1,4 @@
-<?php 
+<?php // funções relacionadas com o funcionamento do site
 
 function changePage( $page){
     $page = strip_tags($page);
@@ -10,14 +10,5 @@ function changePage( $page){
         return $content;
 }
 
-function checkLogin(){
-$tipo = NULL;    
-if(isset($_SESSION['tipo']) && isset($_SESSION['tipo']) && isset($_SESSION['tipo'])){
-$tipo = $_SESSION['tipo'];
-
-}
-return $tipo;
-
-}
 
 ?>

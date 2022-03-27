@@ -1,5 +1,6 @@
 <?php
-require_once 'functions/database.php';
+
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -253,6 +254,14 @@ echo print_r($_POST);
    ?> 
 </select>
 </td>
+</tr>
+<tr>
+    <td>  <div class="custom-file">
+
+    <input type="file" class="custom-file-input" id="customFileLang"  lang="pt">
+    <label class="custom-file-label" for="inputGroupFile03">Foto de perfil</label>
+  </div>
+    </td>
 </tr>
 </form>
 <tr>

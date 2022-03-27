@@ -9,19 +9,22 @@
     <header class="row ">
         
     <div class="col "><h1><a href="index.php"><img src="img/header.png" height="80" width="150"> </a></h1></div>
-     <?php if(checkLogin()==="Instituto") : ?>
+     <?php if(isLoggedInInstitute()) : ?>
       <div class="col">
       </div class>
-      <?php endif?>
-      <?php if(checkLogin()==="Voluntario") : ?>
-      <?php endif?>
+      <?php endif;?>
+      <?php if(isLoggedInVoluntario()) : ?>
+
+
+
+      <?php endif;?>
     </header>
 
 
 
 
        <!-- Caso seja instituto --> 
-    <?php if(checkLogin()==="Instituto") : ?>
+    <?php if(isLoggedInInstitute()) : ?>
 
       <nav class=" navbar-expand-sm bg-primary navbar-dark">
   <!-- Brand -->
@@ -59,7 +62,7 @@
      <?php endif?>
 
     <!-- Caso seja voluntario -->
-     <?php if(checkLogin()==="Voluntario") : ?>
+     <?php if(isLoggedInVoluntario()) : ?>
 
       <nav class=" navbar-expand-sm bg-primary navbar-dark">
   <!-- Brand -->
@@ -97,7 +100,7 @@
     <?php endif?>
 
 
-    <?php if(checkLogin()==NULL) : ?>
+    <?php if(!isLoggedInVoluntario() || !isLoggedInInstitute()) : ?>
 
       <nav class=" navbar-expand-sm bg-primary navbar-dark">
   <!-- Brand -->

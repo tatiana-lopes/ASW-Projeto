@@ -1,7 +1,9 @@
 
-<?php if(!isLoggedIn()): ?> 
+<?php if(!isLoggedIn()){ 
+    header( "Location: /asw/admin/index.php?page=login" );
+}
 
-
+?>
 
 
 
@@ -25,5 +27,5 @@
 
 
 
-<?php endif; ?> 
+
     
