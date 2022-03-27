@@ -127,6 +127,38 @@ function editUser($id){
 
 }
 
+function getUserByAge($age) {
+
+    $conn = getConnection();
+    $query = "SELECT YEAR(CURRENT_TIMESTAMP) - YEAR(dob) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(dob, 5)) as age FROM Voluntario";
+    $result = mysqli_query($conn, $query);
+  
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach ($result as $key => $value) {
+        $query2 = "SELECT * FROM VOLUNTARIO WHERE age = '{$age}'";
+        $result2 = mysqli_query($conn, $query2);
+        
+        if (mysqli_num_rows($result2) > 0) {
+            $column = array();
+            foreach ($result2 as $key => $value) {
+                $column[$key] = $value;
+            }
+        } 
+            else {
+            echo "0 results";
+            }
+        }
+    }     
+    else{
+      echo "0 results";
+    }
+    mysqli_close($conn);
+    return $column;
+}
+
+
+
 function getCountUsers(){
 
     $conn = getConnection();
