@@ -6,30 +6,41 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 $LocalDirectory = dirname(__FILE__);
 include "function.php";
-session_start();
+if((isset($_GET['action']))){
+    if($_GET['action']==="logout"){
+        session_destroy();
+    }
 
-$content = 'login';
-$adminLogin;
-if(!isset($admin)){
-$content="login";
+
 
 }
 
 
-if(isset($_GET['page']) && isset($adminLogin)){
+
+
+
+if(isset($_GET['page'])){
 $content = changePage($_GET['page']);
 }else{
-$content = 'login';
+$content = 'home';
 }
 echo '<!DOCTYPE html>';
 echo '<html lang="<?php echo $htmlLang ?>">';
-
 include './header.php';
 
-include    './nav.php';
+if(isLoggedIn()){
+   
+    include    './nav.php';
+    
+    
+    include   './'.$content . '.php';
+    include  './footer.php';
+}
+if(!isLoggedIn()){
+    include   './login.php';
 
-include   './'.$content . '.php';
+}
 
-include  './footer.php';
+
  
 ?>

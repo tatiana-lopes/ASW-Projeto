@@ -5,7 +5,7 @@ function changePage( $page){
     if(!empty($page)){
         $content =$page;
         }else{
-        $content = 'content' ;
+        $content = 'home' ;
         }
         return $content;
 }

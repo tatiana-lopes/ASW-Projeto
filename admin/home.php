@@ -1,7 +1,17 @@
-<?php
-if(checkLogin()==Null){ 
-header('Location: index.php');
-exit();
-}
-$user = array();
-?>
+
+<?php if(isLoggedIn()): ?> 
+
+<p>nãoconsegue ver isto</p>
+
+
+
+
+
+
+
+
+
+
+
+
+<?php endif; ?> 

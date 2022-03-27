@@ -1,12 +1,13 @@
-<?php
-if(checkLogin()==Null){ 
-header('Location: index.php');
-exit();
-}
-$user = array();
-?>
 
-    
+<?php if(!isLoggedIn()): ?> 
+
+
+
+
+
+
+
+
 <article class="row mt-5">
     <div class="col ml-5">
         
@@ -19,3 +20,10 @@ $user = array();
     </div>
     </article>
 </body>
+
+
+
+
+
+<?php endif; ?> 
+    

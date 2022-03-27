@@ -18,68 +18,61 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           $login = loginAdmin($user,$password);
               if($login){
                  
-                 header('Location: index.php');
-                 
+                 echo "<p> LOGIN COM SUCESS</p>";
+                 header( "Location: /index.php?page=home" );
+                 die();
             /// redirecionar para outra pagina, temos de arranjar forma de permanecer com login
                
               }else{
-                 $loginError =TRUE;
+                // mensagem de erro quando os dados de login forem invalidos
+                 $loginError ="Dados Inválidos";
 
              }
         }else{
-          $loginError =TRUE;
+          // mensagem de erro quando não houverem os dados todos no post
+          $loginError ="Por favor insira todos os dados";
         
         }
 
-
-
-  
-
     }
   
-
-
-
-
   }
 
 
 ?>
+  <body class="text-center">
     
-    <article class="row mt-5">
-    <div class="col ml-5">
-        
-    <h1>Index</h1>
+    <main class="form-signin">
     <?php echo print_r($_POST); ?>
-        <?php echo print_r($_SESSION);?> 
-    echo "<br>";
-    echo "\n";?>
-    
-    
-   
-    <form action="#" id="loginUser"method="POST">
-        <?php if (isset($loginError)){ echo "
-  <p>Dados de Login Inválidos</p>";}
+
+
+<?php if (isset($loginError)){ echo $loginError;}
  ?>
-          <!-- Email input -->
-          <div class="form-outline mb-4">
-            <label class="form-label"  for="username">Nome de Usuário</label>
-            <input type="text" name="username" id="username" class="form-control form-control-lg" />
-            
-          </div>
-
-          <!-- Password input -->
-          <div class="form-outline mb-4"> 
-            <label class="form-label" for="password">Password</label>
-            <input type="password" name="password" id="password" class="form-control form-control-lg" />
-           
-          </div>
-
-          <!-- Submit button -->
-          <button type="submit" form="loginUser" name="login" class="btn btn-primary btn-lg btn-block">Entrar</button>
-
-
-        </form>
-    </div>
-    </article>
-</body>
+    <form action="" id="loginUser"method="POST">
+        <img class="mb-4" src="../admin/img/header.png" alt="fcul logo"  height="80" width="150">
+        <h1 class="h3 mb-3 fw-normal">Digite os seus dados</h1>
+    
+        <div class="form-floating"> 
+          <label for="username">Usuário</label>
+          <input type="text" class="form-control" name="username" id="username"  placeholder="Nome Usuário">
+         
+        </div>
+        <div class="form-floating">   
+          <label for="floatingPassword">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+       
+        </div>
+    
+       
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" form="loginUser" name="login"  type="submit">Entrar</button>
+        <pre class="mt-5 mb-3 text-muted">Projeto ASW 2022/2023 <br><br> Universidade  de  Lisboa <br> Faculdade de Ciências</p>
+       
+      </form>
+    </main>
+    
+    
+        
+      </body>
+    </html>
+       
