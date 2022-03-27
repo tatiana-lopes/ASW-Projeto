@@ -74,6 +74,41 @@ function changePage( $page){
         return $content;
 }
 
+function createTable($data,$titles){
+echo "<table class='table table-striped table-hover'>";
+    createRowTittle($titles);
+    for( $i = 0 ; $i< count($data) ; $i++){
+        echo "<td>". createRow($data[$i]) . "</td>";
+    }
+
+
+
+echo "</table>";
+
+
+}
+
+function createRowTittle($rowHeading){
+    echo "<tr>";
+    for( $i = 0 ; $i< count($rowHeading) ; $i++){
+    echo "<th>{$rowHeading[$i]}</th>";
+
+    }
+    echo "</tr>";
+
+}
+function createRow($row){
+
+    echo "<tr>";
+    for( $i = 0 ; $i< count($row) ; $i++){   
+     if($i == 4) $i++;
+    echo "<td class='table-light'>{$row[$i]}</td>";
+
+    }
+    echo "</tr>";
+}
+
+
 
 function getUserById(){
 

@@ -33,12 +33,10 @@
         Pesquisa
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="<?php echo 'search.php' .  '&search=local'  ?>">Utilizadores</a>
-        <a class="dropdown-item" href="<?php echo 'search.php' . '?id=' . $_SESSION['id'] . '&search=choose'  ?>">Procurar em Local </a>
-        <a class="dropdown-item" href="<?php echo 'search.php' .  '&search=local'  ?>">Procurar Email</a>
-        <a class="dropdown-item" href="<?php echo 'search.php' . '?id=' . $_SESSION['id'] . '&search=choose'  ?>">Procurar Nome </a>
-        <a class="dropdown-item" href="<?php echo 'search.php' .  '&search=local'  ?>">Procurar Nome</a>
-        <a class="dropdown-item" href="<?php echo 'search.php' . '?id=' . $_SESSION['id'] . '&search=choose'  ?>">Voluntarios por Local </a>
+        <a class="dropdown-item" href="<?php echo 'search.php' .  '&search=local'  ?>">Todos os Usuários</a>
+        <a class="dropdown-item" href="<?php echo 'search.php?users=all'  ?>">Pesquisa com Critérios </a>
+
+      
       </div>
     </li>
     <li class="nav-item">
