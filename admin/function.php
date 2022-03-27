@@ -7,7 +7,7 @@ function isAdmin(){
 
 function loginAdmin($user,$pass){
         $conn = getConnection();
-        $query = "SELECT * FROM Admin WHERE username =  \"{$user}\" AND password = \"{$pass}\" ";
+        $query = "SELECT * FROM Admin WHERE username =  \"{$user}\"  ";
         $result = mysqli_query($conn,$query);
         $login=false;
         if (mysqli_num_rows($result) > 0) {
@@ -15,11 +15,16 @@ function loginAdmin($user,$pass){
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }  
+             if(password_verify($pass, $user['password'])){
+
+             
            // caso as passwords sejam iguais , criar uma sessão em que
               $_SESSION['tipo'] = 'Admin';          // é declarado um voluntário e é dado o seu nome e id encriptado
               $_SESSION['user'] = $user['username'];      // o id encriptado sera usado para ir a sua pagina de preferencias 
               $_SESSION['id'] = $user['admin_id'];
+              $_SESSION['logged']= true;
               $login = true;
+             }
             }else{
                 return false;
             }
@@ -46,8 +51,12 @@ function loginAdmin($user,$pass){
 
 function isLoggedIn(){
 $result =false;
-if(isset($_SESSION)){
-    if(strcmp($_SESSION['tipo'],'Admin')==0){
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+    $_SESSION = array();
+}  
+if(!empty($_SESSION)){
+    if($_SESSION['tipo'] === "Admin" && $_SESSION['logged']==TRUE){
      $result = true;
     }
 }

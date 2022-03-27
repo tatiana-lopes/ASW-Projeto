@@ -194,48 +194,8 @@ function RegisterVoluntario($dados ){  // POR O RESTO DOS DADOS NECESSARIOS
 
   }   
   
-  // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
-  function RegisterInstitution($username,$password ){  // POR O RESTO DOS DADOS NECESSARIOS
-    $conn = getConnection();
-    $query = "INSET INTO * FROM Concelho"; // VAI TER DE SER UM INSERT COM OS DADOS RECEBIDOS
-    $result = mysqli_query($conn,$query);
-    
-    
-    if (mysqli_num_rows($result) > 0) {
-      $column = array();
-      foreach($result as $key => $value){
-        $column[$key] = $value;
-      }
+     // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
   
-  
-    } else {
-      echo "0 results";
-    }
-  mysqli_close($conn);
-  return $column;
-    }   // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
-  
-    function addDonation($idInstitute,$name ){  // POR O RESTO DOS DADOS NECESSARIOS
-      $conn = getConnection();
-      $query = "SELECT * FROM Concelho"; // VAI TER DE SER UM INSERT COM OS DADOS RECEBIDOS
-      $result = mysqli_query($conn,$query);
-      
-      
-      if (mysqli_num_rows($result) > 0) {
-        $column = array();
-        foreach($result as $key => $value){
-          $column[$key] = $value;
-        }
-    
-    
-      } else {
-        echo "0 results";
-      }
-    mysqli_close($conn);
-    return $column;
-      }   // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
-    
-
       function loginUser($email, $password){
         $conn = getConnection();
         $query = "SELECT * FROM Utilizador WHERE email = ".$email ;

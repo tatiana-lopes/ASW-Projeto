@@ -14,6 +14,7 @@ if((isset($_GET['action']))){
 
 
 }
+session_start();
 
 
 
@@ -33,7 +34,7 @@ if(isLoggedIn()){
     include    './nav.php';
     
     
-    include   './'.$content . '.php';
+    include   './home.php';
     include  './footer.php';
 }
 if(!isLoggedIn()){

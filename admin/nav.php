@@ -25,7 +25,7 @@
   <!-- Links -->
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="<?php echo 'logout.php' . '?id=' . $_SESSION['id']  ?>">Logout</a>
+      <a class="nav-link" href="<?php echo 'logout.php' ?>">Logout</a>
     </li>
     <!-- Dropdown -->
     <li class="nav-item dropdown">
@@ -43,9 +43,7 @@
     <li class="nav-item">
       <a class="nav-link" href="<?php echo 'settings.php' . '?id=' . $_SESSION['id']  ?>">Preferências</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="<?php echo 'profile.php' . '?id=' . $_SESSION['id']  ?>">Meu Perfil</a>
-    </li>
+
   </ul>
   
 

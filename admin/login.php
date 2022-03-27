@@ -9,17 +9,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // se foi post e  a var login está posta foi uma tentativa de login
     if(isset($_POST['login'])){
       // se o login e password foram assignados
-       if(isset($_POST['username']) && isset($_POST['password'])){
+       if(!empty(trim($_POST['username'])) && !empty(trim($_POST['password']))){
           $user = htmlspecialchars($_POST['username']);
           $user = strip_tags($user);
 
-          $password = md5($_POST['password']);
           
-          $login = loginAdmin($user,$password);
+          
+          $login = loginAdmin($user,$_POST['password']);
+         
               if($login){
-                 
+
                  echo "<p> LOGIN COM SUCESS</p>";
-                 header( "Location: /index.php?page=home" );
+                 header( "Location: /asw/admin/index.php?page=home" );
                  die();
             /// redirecionar para outra pagina, temos de arranjar forma de permanecer com login
                
@@ -43,12 +44,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <body class="text-center">
     
     <main class="form-signin">
-    <?php echo print_r($_POST); ?>
+ 
+    
 
 
 <?php if (isset($loginError)){ echo $loginError;}
  ?>
-    <form action="" id="loginUser"method="POST">
+    <form action="" id="loginAdmin"method="POST">
         <img class="mb-4" src="../admin/img/header.png" alt="fcul logo"  height="80" width="150">
         <h1 class="h3 mb-3 fw-normal">Digite os seus dados</h1>
     
@@ -65,7 +67,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
        
         </div>
-        <button class="w-100 btn btn-lg btn-primary" form="loginUser" name="login"  type="submit">Entrar</button>
+        <button class="w-100 btn btn-lg btn-primary" form="loginAdmin" name="login" id="login" type="submit">Entrar</button>
         <pre class="mt-5 mb-3 text-muted">Projeto ASW 2022/2023 <br><br> Universidade  de  Lisboa <br> Faculdade de Ciências</p>
        
       </form>
