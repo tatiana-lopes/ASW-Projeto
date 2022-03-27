@@ -194,7 +194,7 @@ function RegisterVoluntario($dados)
 
 
 function RegisterInstitution($dados)
-{  // POR O RESTO DOS DADOS NECESSARIOS
+{ 
   $conn = getConnection();
   $query = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_distrito, codigo_concelho, codigo_freguesia) VALUES ( " . $dados['email'] . ", I ," .  $dados['tel'] . "," .  $dados['password'] . "," .  $dados['nome'] . ", " . $dados['c_distrito']  . "," .  $dados['c_concelho'] . "," .  $dados['c_freguesia'] . ");";
   $query .= "INSERT INTO Instituicao (tipo, descricao, morada, n_contacto, nome_contacto) VALUES ( " . $dados['tipo'] . "," . $dados['descricao'] . "," . $dados['morada'] . "," . $dados['contactoR'] . "," . $dados['nomeR'] . ");";
