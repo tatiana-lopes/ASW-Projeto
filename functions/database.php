@@ -217,20 +217,16 @@ function addDonation($idInstitute,$name, $tipo, $quantidade ){
   $query = "INSERT INTO Alimento( inst_id, id, tipo_doacao, quantidade) VALUES (" . $idInstitute . ", NULL ," .  $name . "," . $tipo . "," . $quantidade . ");"; 
   $result = mysqli_query($conn,$query);
   
-  
-  if (mysqli_num_rows($result) > 0) {
-    $column = array();
-    foreach($result as $key => $value){
-      $column[$key] = $value;
-    }
-
-
+  if ($result) {
+    echo "Um novo registo inserido com sucesso";
+    mysqli_close($conn);
+    return True;
   } else {
-    echo "0 results";
-  }
-mysqli_close($conn);
-return $column;
-  }   // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
+    echo "Erro: insert failed" . $query . "<br>" . mysqli_error($conn);
+    mysqli_close($conn);
+    return False;
+  }  
+} // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
 
 
   function loginUser($email, $password){
@@ -266,9 +262,9 @@ return $column;
   }
 
 
-  function userExistsByName($email){
+  function userExistsByName($name){
     $conn = getConnection();
-    $query = "SELECT * FROM Utilizador WHERE email = '{$email}'";  
+    $query = "SELECT * FROM Utilizador WHERE email = '{$name}'";  
 
     $result = mysqli_query($conn,$query);
        

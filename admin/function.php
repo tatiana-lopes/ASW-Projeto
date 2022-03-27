@@ -72,6 +72,27 @@ function getUserById($id){
 
 }
 
+function getUserByName($name){
+    $conn = getConnection();
+    $query = "SELECT * FROM Utilizador WHERE nome = '{$name}'"; 
+    $result = mysqli_query($conn, $query);
+  
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach ($result as $key => $value) {
+        $column[$key] = $value;
+      }
+    } else {
+      echo "0 results";
+    }
+    mysqli_close($conn);
+    return $column;
+
+}
+
+
+
+
 function getUserbyType($type){
 
     $conn = getConnection();
