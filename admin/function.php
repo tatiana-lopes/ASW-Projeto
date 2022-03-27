@@ -54,7 +54,8 @@ return $result;
 
 function getUserById($id){
     $conn = getConnection();
-    $query = "SELECT * FROM Utilizador WHERE id_U = '{$id}'"; 
+    $query = "SELECT * FROM Utilizador, Voluntario WHERE Utilizador.'{$id}' = Voluntario.'{$id}';"; 
+    $query .= "SELECT * FROM Utilizador, Instituicao WHERE Utilizador.'{$id}' = Instituicao.'{$id}'"; 
     $result = mysqli_query($conn, $query);
   
   
@@ -74,7 +75,8 @@ function getUserById($id){
 
 function getUserByName($name){
     $conn = getConnection();
-    $query = "SELECT * FROM Utilizador WHERE nome = '{$name}'"; 
+    $query = "SELECT * FROM Utilizador, Voluntario WHERE nome = '{$name}' AND Utilizador.id = Voluntario.id_U;"; 
+    $query .= "SELECT * FROM Utilizador, Instituicao WHERE nome = '{$name}' AND Utilizador.id = Instituicao.id_U"; 
     $result = mysqli_query($conn, $query);
   
     if (mysqli_num_rows($result) > 0) {
@@ -96,7 +98,8 @@ function getUserByName($name){
 function getUserbyType($type){
 
     $conn = getConnection();
-    $query = "SELECT * FROM Utilizador where tipo = '{$type}'";
+    $query = "SELECT * FROM Utilizador, Voluntario where tipo = '{$type}' AND Utilizador.id = Voluntario.id_U;";
+    $query .= "SELECT * FROM Utilizador, Instituicao where tipo = '{$type}' AND Utilizador.id = Instituicao.id_U";
     $result = mysqli_query($conn, $query);
   
 
