@@ -167,6 +167,62 @@ function getUserByAge($age) {
 }
 
 
+function getUSerbyDistritoID($distrito_id){
+    $conn = getConnection();
+    $query = "SELECT * FROM Utilizador, Voluntario where codigo_distrito = '{$distrito_id}' AND Utilizador.id = Voluntario.id_U;";
+    $query .= "SELECT * FROM Utilizador, Instituicao where codigo_distrito = '{$distrito_id}' AND Utilizador.id = Instituicao.id_U";
+    $result = mysqli_query($conn, $query);
+   
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach ($result as $key => $value) {
+        $column[$key] = $value;
+      }
+    } else {
+      echo "0 results";
+    }
+    mysqli_close($conn);
+    return $column;
+}
+
+
+function getUSerbyFreguesiaID($freguesia_id){
+    $conn = getConnection();
+    $query = "SELECT * FROM Utilizador, Voluntario where codigo_freguesia = '{$freguesia_id}' AND Utilizador.id = Voluntario.id_U;";
+    $query .= "SELECT * FROM Utilizador, Instituicao where codigo_freguesia = '{$freguesia_id}' AND Utilizador.id = Instituicao.id_U";
+    $result = mysqli_query($conn, $query);
+   
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach ($result as $key => $value) {
+        $column[$key] = $value;
+      }
+    } else {
+      echo "0 results";
+    }
+    mysqli_close($conn);
+    return $column;
+}
+
+function getUSerbyConcelhoID($concelho_id){
+    $conn = getConnection();
+    $query = "SELECT * FROM Utilizador, Voluntario where codigo_concelho = '{$concelho_id}' AND Utilizador.id = Voluntario.id_U;";
+    $query .= "SELECT * FROM Utilizador, Instituicao where codigo_concelho = '{$concelho_id}' AND Utilizador.id = Instituicao.id_U";
+    $result = mysqli_query($conn, $query);
+   
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach ($result as $key => $value) {
+        $column[$key] = $value;
+      }
+    } else {
+      echo "0 results";
+    }
+    mysqli_close($conn);
+    return $column;
+}
+
+
 function getCountUsers(){
 
     $conn = getConnection();
