@@ -116,16 +116,25 @@ function getUserbyType($type){
 
 }
 
-function deleteUser($id){
+function getUserByEmail($email){
 
-    
-
+    $conn = getConnection();
+    $query = "SELECT * FROM Utilizador, Voluntario where Utilizador.email = '{$email}' AND Utilizador.id = Instituicao.id_U";
+    $result = mysqli_query($conn, $query);
+   
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach ($result as $key => $value) {
+        $column[$key] = $value;
+      }
+    } else {
+      echo "0 results";
+    }
+    mysqli_close($conn);
+    return $column;
 }
 
-function editUser($id){
 
-
-}
 
 function getUserByAge($age) {
 
@@ -156,7 +165,6 @@ function getUserByAge($age) {
     mysqli_close($conn);
     return $column;
 }
-
 
 
 function getCountUsers(){
