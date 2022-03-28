@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 
 $erros = array();
 $missing = array();
-
+$data = array();
 
 
 //Caso tenha sido feito um pedido Post
@@ -20,34 +20,40 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($_POST['nome'])){
     array_push($missing, 'nome');    
     
+    }else{
+        $data['nome'] = htmlspecialchars($_POST['nome']);
+        $data['nome'] = stripcslashes($data['nome']);
     }   
       // e caso a variavel passwor não  esteja assignada
     if(empty($_POST['password'])){
     array_push($missing ,"password");
     }else{
-        $pass = md5($_POST['password']);
+        $data['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
     }
     if(empty($_POST['password2'])){
         array_push($missing ,"password2");
         }else{
-            $passRepetition= md5($_POST['password2']);
+            $passRepetition= password_hash($_POST['password2'], PASSWORD_BCRYPT);
     
         }
       // e caso a variavel email não esteja assignada
     if(empty($_POST['email'])){
         array_push($missing ,"email");
    }else{
-       $email = htmlspecialchars($_POST['email']);
-       $email = stripcslashes($email);
-       $checkResult = userExistsByEmail($email);
-             if($checkResult){
-                   $erros['email']= "Utilizador com email" . $email . " já existe.";
-              }
+       $data['email'] = htmlspecialchars($_POST['email']);
+       $data['email'] = stripcslashes( $data['email']);
+      // $checkResult = userExistsByEmail($data['email']);
+        //     if($checkResult){
+                //   $erros['email']= "Utilizador com email" . $data['email'] . " já existe.";
+          //    }
       }   
      // e caso a variavel cc não esteja assignada
     if(empty($_POST['cc'])){
        array_push($missing ,"cc");
+    }else{
+        $data['cc'] = htmlspecialchars($_POST['cc']);
+        $data['cc'] = stripcslashes($data['cc']);
     }
      // e caso a variavel Cconducao não esteja assignada
     if(empty($_POST['Cconducao'])){
@@ -55,9 +61,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else{
         // caso contrario trata a informação e pede a função da database para ver se já existe,
         // caso existe adiciona a array erros;
-        $conducao = htmlspecialchars($_POST['Cconducao']);
-        $conducao = stripcslashes($conducao);
-        $checkResult = userExistsByCondC($conducao);
+        $data['Cconducao'] = htmlspecialchars($_POST['Cconducao']);
+        $data['Cconducao']  = stripcslashes(  $data['Cconducao'] );
+        $checkResult = userExistsByCondC($data['Cconducao'] );
         if($checkResult){
          $erros['Cconducao']= "Utilizador com email" . $email . " já existe.";
         }
@@ -65,29 +71,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }if(empty($_POST['dob'])){
         array_push($missing ,"dob");
     }else{
-       // e caso a variavel gen não esteja assignada
+        $data['dob'] = htmlspecialchars($_POST['dob']);
+        $data['dob']  = stripcslashes(  $data['dob'] );
+       
     }
     if(isset($pass)&& isset($passRepetition)){
     if($pass !== $passRepetition){
         $erros['pass'] = "Passwords não são identicas";
-    }else{
-        $_POST['password'] =$pass;
-        unset( $_POST['password2']);
     }
 }
-    // se não houver erros ou valores vazios
+    // se não houve[r erros ou valores vazios
     if(empty($missing) && empty($erros)){
-    $dados = array();
+        $data['codC'] = htmlspecialchars($_POST['codC']);
+        $data['freg'] = htmlspecialchars($_POST['freg']);
+        $data['codC'] = strip_tags($data['codC']);
+        $data['freg'] = strip_tags($data['freg']);
     //para cada valor do pos tratar e adicionar a uma array associativa
-    foreach($_POST as $key =>$value){
-     $valor = htmlspecialchars($value);
-     $valor = stripcslashes($valor);
-     array_push($dados[$key],$valor);
-    }
-    // fazer chamada a função para registar
-    $result = RegisterVoluntario($dados);
+   $result = RegisterVoluntario($data);
         if($result){
             //caso o resultado seja positivo ir para o index
+            session_start();
              header('Location: index.php');
                  die();
 
@@ -96,6 +99,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $erros['submit'] = TRUE;
 
         }
+    }
+    // fazer chamada a função para registar
+    
     
 
     }
@@ -104,7 +110,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
 
-    }
+    
 }
 
 
@@ -215,7 +221,7 @@ echo print_r($_POST);
 
 </td>
 <td>
-<select name="concelho">
+<select name="concelho" name="codC" id="codC">
  
     <?php
     
@@ -237,7 +243,7 @@ echo print_r($_POST);
 </select>
 </td>
 <td>
-<select name="freguesia">
+<select name="freguesia"  name="freg" id="freg">
 <?php
     
     $freguesia = getFreguesias();

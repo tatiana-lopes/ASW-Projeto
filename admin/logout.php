@@ -2,7 +2,7 @@
 session_start();
 
 session_destroy();
-header( "Location: /asw/admin/index.php" );
+header( "Location: /~asw09/ASW-Projeto/admin/index.php" );
 die();
 
 

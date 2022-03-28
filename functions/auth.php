@@ -51,16 +51,19 @@ function isLoggedInInstitute(){
         }
     }
     }
-
+    
     function RegisterVoluntario($dados)
     {  // POR O RESTO DOS DADOS NECESSARIOS
       $conn = getConnection();
-      $query = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_distrito, codigo_concelho, codigo_freguesia) VALUES ( " . $dados['email'] . ", V ," .  $dados['tel'] . "," .  $dados['password'] . "," .  $dados['nome'] . ", " . $dados['c_distrito']  . "," .  $dados['c_concelho'] . "," .  $dados['c_freguesia'] . ");";
-      $query .= "INSERT INTO Voluntario (cc, carta_conducao, genero, dob, imgPath) VALUES ( " . $dados['cc'] . "," . $dados['Cconducao'] . "," . $dados['gen'] . "," . $dados['dob'] . "," . $dados['imgPath'] . ");";
+      //$query = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_distrito, codigo_concelho, codigo_freguesia) VALUES ( " . $dados['email'] . ", V ," .  $dados['tel'] . "," .  $dados['password'] . "," .  $dados['nome'] . ", " . $dados['c_distrito']  . "," .  $dados['c_concelho'] . "," .  $dados['c_freguesia'] . ");";
+    //  $query2 = "INSERT INTO Voluntario (cc, carta_conducao, genero, dob, imgPath) VALUES ( " . $dados['cc'] . "," . $dados['Cconducao'] . "," . $dados['gen'] . "," . $dados['dob'] . "," . "/path/test". ");";
+      $query = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_distrito, codigo_concelho, codigo_freguesia) ";
+      $query .= "VALUES ( \"{$dados['email']}\" , \"Voluntario\" , 9292922 , \"{$dados['password']}\" , \"{$dados['nome']}\" , 01 , 1000,  1010);";
     
       $result = mysqli_query($conn, $query);
+    // $result2 = mysqli_query($conn, $query2);
       $sucess =false;
-      if ($result) {
+      if ($result ) {
         echo "Um novo registo inserido com sucesso";
         mysqli_close($conn);
         $sucess = True;
@@ -69,6 +72,7 @@ function isLoggedInInstitute(){
     
       }  
        mysqli_free_result($result);
+    
        mysqli_close($conn);
        return   $sucess ;
     }   // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE

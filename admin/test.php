@@ -7,7 +7,11 @@ if(loginAdmin('admin',md5('aswgrupo09'))){
 }
 
 echo password_hash($password, PASSWORD_BCRYPT);
-
+echo "<br>";
+echo dirname(__FILE__);
+echo "\n";
+echo "<br>";
+echo realpath(__FILE__);
 
 
 
