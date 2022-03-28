@@ -1,52 +1,39 @@
 <?php
-
-use function PHPUnit\Framework\isEmpty;
-
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   // e caso a variavel submit esteja assignada
-    $missing;
+    $missing= array();
     $loginError;
+    $loginState =False;
+if(isset($_POST['login'])){
+  // se o login e password foram assignados
+   if(!empty(trim($_POST['username'])) && !empty(trim($_POST['password']))){
+      $user = htmlspecialchars($_POST['username']);
+      $user = strip_tags($user);
 
-    // se foi post e  a var login está posta foi uma tentativa de login
-    if(isset($_POST['login'])){
-      // se o login e password foram assignados
-       if(isset($_POST['email']) && isset($_POST['password'])){
-          $email = htmlspecialchars($_POST['email']);
-          $email = strip_tags($email);
+      
+      
+      $login = loginUser($user,$_POST['password']);
+     
+          if($login){
 
-          $password = md5($_POST['password']);
-          
-          $login = loginUser($email,$password);
-              if($login){
-                 session_start();
-                 header('Location: index.php');
-                 
-            /// redirecionar para outra pagina, temos de arranjar forma de permanecer com login
+             echo "<p> LOGIN COM SUCESS</p>";
+             header( "Location: /~asw09/ASW-Projeto/index.php?page=home" );   /// NO FINAL TEMOS QUE ALTERAR
+             die();
+        /// redirecionar para outra pagina, temos de arranjar forma de permanecer com login
+           
+          }else{
+            // mensagem de erro quando os dados de login forem invalidos
+             $loginError ="Dados Inválidos";
 
-              }else{
-                 $loginError =TRUE;
-
-             }
-        }else{
-          $loginError =TRUE;
-        
-        }
-
-
-
-  
-
+         }
+    }else{
+      // mensagem de erro quando não houverem os dados todos no post
+      $loginError ="Por favor insira todos os dados";
+    
     }
-  
-
-
-
 
   }
-
-
-
-
+}
 ?>
     
     <article class="row mt-5">
@@ -62,7 +49,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  ?>
           <!-- Email input -->
           <div class="form-outline mb-4">
-            <input type="email" name="email" id="email" class="form-control form-control-lg" />
+            <input type="email" name="username" id="email" class="form-control form-control-lg" />
             <label class="form-label"  for="email">Endereço Email</label>
           </div>
 

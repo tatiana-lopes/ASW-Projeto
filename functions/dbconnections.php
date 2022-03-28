@@ -19,30 +19,47 @@ function getConnection(){
   }
 
   
+  function getDistritos()
+  {
+    $conn = getConnection();
+    $query = "SELECT * FROM Distrito;";
+    $result = mysqli_query($conn, $query);
+  
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach ($result as $key => $value) {
+        $column[$key] = $value;
+      }
+    } else {
+      echo "0 results";
+    }
+    mysqli_close($conn);
+    return $column;
+  }
+  
+  
 
 
+  
   function getFreguesias()
   {
     $conn = getConnection();
     $query = "SELECT * FROM Freguesia;";
     $result = mysqli_query($conn, $query);
   
-    
-  
     if (mysqli_num_rows($result) > 0) {
-      
-      $data[] = mysqli_fetch_assoc($result);
-    //  $column = array();
-      //foreach ($result as $key => $value) {
-        //$column[$key] = $value;
-     // }
+      $column = array();
+      foreach ($result as $key => $value) {
+        $column[$key] = $value;
+      }
     } else {
       echo "0 results";
     }
-  
     mysqli_close($conn);
-    return $data;
+    return $column;
   }
+  
+  
   
   function getConcelhos()
   {
@@ -209,7 +226,7 @@ function getConnection(){
   
     function userExistsByEmail($email){
       $conn = getConnection();
-      $query = "SELECT * FROM Utilizador WHERE email = '{$email}'"; 
+      $query = "SELECT * FROM Utilizador WHERE email = \"{$email}\""; 
   
       $result = mysqli_query($conn,$query);
       $sucess =false; 
