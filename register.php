@@ -78,20 +78,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $data['dob'] = htmlspecialchars($_POST['dob']);
         $data['dob']  = stripcslashes(  $data['dob'] );
        
-    }
-    if(isset($pass)&& isset($passRepetition)){
-    if($pass !== $passRepetition){
-        $erros['pass'] = "Passwords não são identicas";
-    }
-    if(empty($_POST['genero'])){
+    }if(empty($_POST['genero'])){
         array_push($missing ,"genero");
 
     }else{
         $data['genero'] = htmlspecialchars($_POST['genero']);
         $data['genero']  = stripcslashes(  $data['genero'] );
-        
     }
-}
+    if(isset($pass)&& isset($passRepetition)){
+    if($pass !== $passRepetition){
+        $erros['pass'] = "Passwords não são identicas";
+    }
+    
+    }
+
     // se não houve[r erros ou valores vazios
     if(empty($missing) && empty($erros)){
         $data['cod_distrito'] = htmlspecialchars($_POST['cod_distrito']);
@@ -141,8 +141,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <p class=\"alerta\">Registro Invalido, por favor corrija os dados</p>";}
 if(isset($erros['pass'])) echo "<p class=\"alerta\">". $erros['pass'] ."</p>";  // secalhar no futuro metemos um foreach dos erros
 
-echo "\n";
-echo print_r($_POST);
+
  ?>
 
 

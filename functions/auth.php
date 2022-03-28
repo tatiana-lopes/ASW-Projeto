@@ -3,7 +3,7 @@
 
 function loginUser($email, $password){
     $conn = getConnection();
-    $query = "SELECT * FROM Utilizador WHERE email = '{$email}'";
+    $query = "SELECT * FROM Utilizador WHERE Utilizador.email = '{$email}'";
     $result = mysqli_query($conn,$query);
     $loginState= false;
     if (mysqli_num_rows($result) > 0) {
@@ -11,7 +11,7 @@ function loginUser($email, $password){
       if (session_status() === PHP_SESSION_NONE) {
           session_start();
       }  
-       if(password_verify($password, $user['password'])){
+       if(password_verify($password, $user['pass'])){
 
      
         $_SESSION['tipo'] = $user['tipo'];          
@@ -84,17 +84,18 @@ function isLoggedInInstitute(){
     function RegisterInstitution($dados)
     { 
       $conn = getConnection();
-      $query = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_distrito, codigo_concelho, codigo_freguesia) VALUES ( " . $dados['email'] . ", I ," .  $dados['tel'] . "," .  $dados['password'] . "," .  $dados['nome'] . ", " . $dados['c_distrito']  . "," .  $dados['c_concelho'] . "," .  $dados['c_freguesia'] . ");";
-      $query .= "INSERT INTO Instituicao (tipo, descricao, morada, n_contacto, nome_contacto) VALUES ( " . $dados['tipo'] . "," . $dados['descricao'] . "," . $dados['morada'] . "," . $dados['contactoR'] . "," . $dados['nomeR'] . ");";
+      $queryUser = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_distrito, codigo_concelho, codigo_freguesia) ";
+      $queryUser .= " VALUES ( \"{$dados['email']}\" , \"Voluntario\" , {$dados['tel']} , '{$dados['password']}' , \"{$dados['nome']}\" , {$dados['cod_distrito']} , {$dados['cod_concelho']}, {$dados['cod_freguesia']}); ";
+          // $query .= "INSERT INTO Instituicao (tipo, descricao, morada, n_contacto, nome_contacto) VALUES ( " . $dados['tipo'] . "," . $dados['descricao'] . "," . $dados['morada'] . "," . $dados['contactoR'] . "," . $dados['nomeR'] . ");";
     
-      $result = mysqli_query($conn, $query);
+      $result = mysqli_query($conn,  $queryUser);
       $sucess =false;
       if ($result) {
         echo "Um novo registo inserido com sucesso";
         mysqli_close($conn);
         $sucess = True;
       } else {
-        echo "Erro: insert failed" . $query . "<br>" . mysqli_error($conn);
+        echo "Erro: insert failed" .  $queryUser . "<br>" . mysqli_error($conn);
         mysqli_close($conn);
         $sucess = False;
       }

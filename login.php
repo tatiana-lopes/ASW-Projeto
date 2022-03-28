@@ -43,7 +43,7 @@ if(isset($_POST['login'])){
         <img src="./img/volunteer.png" class="img-fluid" alt="voluntariado">
       </div>
       <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-        <form action="" name="loginUser" method="POST">
+        <form action="" id="loginUser" method="POST">
         <?php if (isset($loginError)){ echo "
   <p>Dados de Login Inválidos</p>";}
  ?>
@@ -55,8 +55,8 @@ if(isset($_POST['login'])){
 
           <!-- Password input -->
           <div class="form-outline mb-4">
-            <input type="password" id="password" class="form-control form-control-lg" />
-            <label class="form-label" name="password" for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-control form-control-lg" />
+            <label class="form-label"  for="password">Password</label>
           </div>
 
           <div class="d-flex justify-content-around align-items-center mb-4">
