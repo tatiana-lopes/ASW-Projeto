@@ -110,44 +110,232 @@ function createRow($row){
 
 
 
-function getUserById(){
-
+function getUserById($id){
+    $conn = getConnection();
+    $query = "SELECT * FROM Utilizador, Voluntario WHERE Utilizador.'{$id}' = Voluntario.'{$id}';"; 
+    $query .= "SELECT * FROM Utilizador, Instituicao WHERE Utilizador.'{$id}' = Instituicao.'{$id}'"; 
+    $result = mysqli_query($conn, $query);
+  
+  
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach ($result as $key => $value) {
+        $column[$key] = $value;
+      }
+    } else {
+      echo "0 results";
+    }
+    mysqli_close($conn);
+    return $column;
 
 
 }
 
-function getUserbyType(){
-
-
-
+function getUserByName($name){
+    $conn = getConnection();
+    $query = "SELECT * FROM Utilizador, Voluntario WHERE nome = '{$name}' AND Utilizador.id = Voluntario.id_U;"; 
+    $query .= "SELECT * FROM Utilizador, Instituicao WHERE nome = '{$name}' AND Utilizador.id = Instituicao.id_U"; 
+    $result = mysqli_query($conn, $query);
+  
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach ($result as $key => $value) {
+        $column[$key] = $value;
+      }
+    } else {
+      echo "0 results";
+    }
+    mysqli_close($conn);
+    return $column;
 
 }
 
-function deleteUsert($id){
+
+
+
+function getUserbyType($type){
+
+    $conn = getConnection();
+    $query = "SELECT * FROM Utilizador, Voluntario where tipo = '{$type}' AND Utilizador.id = Voluntario.id_U;";
+    $query .= "SELECT * FROM Utilizador, Instituicao where tipo = '{$type}' AND Utilizador.id = Instituicao.id_U";
+    $result = mysqli_query($conn, $query);
+  
+
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach ($result as $key => $value) {
+        $column[$key] = $value;
+      }
+    } else {
+      echo "0 results";
+    }
+    mysqli_close($conn);
+    return $column;
 
 }
 
-function editUser($id){
+function getUserByEmail($email){
 
-
+    $conn = getConnection();
+    $query = "SELECT * FROM Utilizador, Voluntario where Utilizador.email = '{$email}' AND Utilizador.id = Instituicao.id_U";
+    $result = mysqli_query($conn, $query);
+   
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach ($result as $key => $value) {
+        $column[$key] = $value;
+      }
+    } else {
+      echo "0 results";
+    }
+    mysqli_close($conn);
+    return $column;
 }
+
+
+
+function getUserByAge($age) {
+
+    $conn = getConnection();
+    $query = "SELECT YEAR(CURRENT_TIMESTAMP) - YEAR(dob) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(dob, 5)) as age FROM Voluntario";
+    $result = mysqli_query($conn, $query);
+  
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach ($result as $key => $value) {
+        $query2 = "SELECT * FROM VOLUNTARIO WHERE age = '{$age}'";
+        $result2 = mysqli_query($conn, $query2);
+        
+        if (mysqli_num_rows($result2) > 0) {
+            $column = array();
+            foreach ($result2 as $key => $value) {
+                $column[$key] = $value;
+            }
+        } 
+            else {
+            echo "0 results";
+            }
+        }
+    }     
+    else{
+      echo "0 results";
+    }
+    mysqli_close($conn);
+    return $column;
+}
+
+
+function getUSerbyDistritoID($distrito_id){
+    $conn = getConnection();
+    $query = "SELECT * FROM Utilizador, Voluntario where codigo_distrito = '{$distrito_id}' AND Utilizador.id = Voluntario.id_U;";
+    $query .= "SELECT * FROM Utilizador, Instituicao where codigo_distrito = '{$distrito_id}' AND Utilizador.id = Instituicao.id_U";
+    $result = mysqli_query($conn, $query);
+   
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach ($result as $key => $value) {
+        $column[$key] = $value;
+      }
+    } else {
+      echo "0 results";
+    }
+    mysqli_close($conn);
+    return $column;
+}
+
+
+function getUSerbyFreguesiaID($freguesia_id){
+    $conn = getConnection();
+    $query = "SELECT * FROM Utilizador, Voluntario where codigo_freguesia = '{$freguesia_id}' AND Utilizador.id = Voluntario.id_U;";
+    $query .= "SELECT * FROM Utilizador, Instituicao where codigo_freguesia = '{$freguesia_id}' AND Utilizador.id = Instituicao.id_U";
+    $result = mysqli_query($conn, $query);
+   
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach ($result as $key => $value) {
+        $column[$key] = $value;
+      }
+    } else {
+      echo "0 results";
+    }
+    mysqli_close($conn);
+    return $column;
+}
+
+function getUSerbyConcelhoID($concelho_id){
+    $conn = getConnection();
+    $query = "SELECT * FROM Utilizador, Voluntario where codigo_concelho = '{$concelho_id}' AND Utilizador.id = Voluntario.id_U;";
+    $query .= "SELECT * FROM Utilizador, Instituicao where codigo_concelho = '{$concelho_id}' AND Utilizador.id = Instituicao.id_U";
+    $result = mysqli_query($conn, $query);
+   
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach ($result as $key => $value) {
+        $column[$key] = $value;
+      }
+    } else {
+      echo "0 results";
+    }
+    mysqli_close($conn);
+    return $column;
+}
+
 
 function getCountUsers(){
 
+    $conn = getConnection();
+    $query = "SELECT COUNT(*) FROM Utilizador";
+    $result = mysqli_query($conn, $query);
+  
+
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach ($result as $key => $value) {
+        $column[$key] = $value;
+      }
+    } else {
+      echo "0 results";
+    }
+    mysqli_close($conn);
+    return $column;
 }
 
+
 function getCountVoluntarios(){
+    $conn = getConnection();
+    $query = "SELECT COUNT(*) FROM Voluntario";
+    $result = mysqli_query($conn, $query);
+  
 
-
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach ($result as $key => $value) {
+        $column[$key] = $value;
+      }
+    } else {
+      echo "0 results";
+    }
+    mysqli_close($conn);
+    return $column;
 }
 
 function getCountInstitutos(){
+    $conn = getConnection();
+    $query = "SELECT COUNT(*) FROM Instituicao";
+    $result = mysqli_query($conn, $query);
+  
 
-
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach ($result as $key => $value) {
+        $column[$key] = $value;
+      }
+    } else {
+      echo "0 results";
+    }
+    mysqli_close($conn);
+    return $column;
 }
-
-
-
 
 
 ?>
