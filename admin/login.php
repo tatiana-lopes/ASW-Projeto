@@ -16,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           
           
           $login = loginAdmin($user,$_POST['password']);
-         
+          
               if($login){
 
                  echo "<p> LOGIN COM SUCESS</p>";
