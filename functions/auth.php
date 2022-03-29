@@ -87,7 +87,7 @@ function isLoggedInInstitute(){
       $queryUser = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_distrito, codigo_concelho, codigo_freguesia) ";
       $queryUser .= " VALUES ( \"{$dados['email']}\" , \"Instituicao\" , {$dados['tel']} , '{$dados['password']}' , \"{$dados['nome']}\" , {$dados['cod_distrito']} , {$dados['cod_concelho']}, {$dados['cod_freguesia']}); ";
       $queryInst = "INSERT INTO Instituicao (id_U, tipo, descricao, morada, n_contacto, nome_contacto)";
-      $queryInst .= "VALUES ( LAST_INSERT_ID(), '{$dados['tipo']}' ,  '{$dados['descricao']}' , '{$dados['morada']}' , {$dados['contactoR']} , '{$dados['nomeR']}');";
+      $queryInst .= "VALUES ( LAST_INSERT_ID(), '{$dados['descricao']}' ,  '{$dados['descricao']}' , '{$dados['morada']}' , {$dados['contactoR']} , '{$dados['nomeR']}');";
     
       $result = mysqli_query($conn,  $queryUser);
       $result2 = mysqli_query($conn, $queryInst);

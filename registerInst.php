@@ -81,6 +81,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $data['description']  = stripcslashes(  $data['description'] );
         
     }
+
+    if(empty($_POST['tipo'])){
+        array_push($missing ,"description");
+
+    }else{
+        $data['tipo'] = htmlspecialchars($_POST['tipo']);
+        $data['tipo']  = stripcslashes(  $data['tipo'] );
+        
+    }
+
     if(isset($pass)&& isset($passRepetition)){
     if($pass !== $passRepetition){
         $erros['pass'] = "Passwords não são identicas";
@@ -127,227 +137,246 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 ?>
 
-<article >
+<article>
     <br>
-    
-<div class=" justify-content-center">
+
+    <div class=" justify-content-center">
 
 
-<form action="" method="POST" id="registro" >
-
-
-
-
-<!--  verificar se esta em falta o nome -->
-<div class=" row">
-    <div class="col">
-        <label for="nome">Nome:
-        <?php if (in_array('nome', $missing) ) 
-                echo "<span class=\"alerta\" > Introduza Nome*</span>";?>
-        </label>
-        <input type="text" class="form-control <?php if (in_array('nome', $missing)) 
-                    echo " is-invalid";?> " name="nome" id="nome" value="" >
-
-    </div>
-    <div class="col">
-        <label for="email">Email:
-            <?php if (in_array('email', $missing) ) 
-                echo "<span class=\"alerta\" > Introduza Email*</span>";?>
-
-        </label>
-        <input type="text"  class="form-control" id="email" name="email" value="">
-        <span class="help-block"> <?php  // texto de ajuda ou aviso)?> </span>
-
-    </div>
-</div>
-<div class="row">
-
-    <div class="col"> 
-
-        <label for="password">Password: 
-        <?php if (in_array('password', $missing) ) 
-            echo "<span class=\"alerta\" > Password em falta*</span>";?>
-        </label>    
-        <input type="password"  class="form-control" name="password" id="password">
-    
-    </div>
-    
-    <div class="col">
-    <label for="tel">Telefone: 
-                <?php if (in_array('tel', $missing)) 
-                    echo " Telefone em falta";?>
-            </label>
-            <input type="number"  class="form-control  <?php if (in_array('tel', $missing)) 
-                    echo " isIis-invalid";?>" id="tel" name="tel" value="<?php 
-                   if(isset($_POST['tel'])) echo $_POST['tel'] ?>">
-            </div>
-</div>
-
-<div class="row">
-        <div class="col">    
-            
-        <label for="password2">Repita sua Password: 
-            <?php if (in_array('password2', $missing) ) 
-                echo "<span class=\"alerta\" > Password em falta *</span>";?>
-        </label>
-        <input type="password"  class="form-control" name="password2" id="password2">
-    </div>     
-            
-    <div class="col">
-
-            <label for="morada">Morada
-            <?php if (in_array('morada', $missing)) 
-                    echo " Nome em falta";?>
-
-            </label>
-
-            <input type="text"  class="form-control" id="morada" name="morada" value="<?php if(isset($_POST['morada'])) echo $_POST['morada'] ?>">
-</div>
-
-    
-</div>
+        <form action="" method="POST" id="registro">
 
 
 
-<div class="row">
-<div class="col">
-        <label for="dist" class="" >
-        Distrito
-        </label>
-        <select name="cod_distrito" class="form-control"  id="dist">
-            <?php
-                
-                $distritos = getDistritos();
-                if($distritos > 0 ){
-                    foreach($distritos as $key => $valor ){
-                        echo "<option value=" . $valor['cod_distrito'] . ">". $valor['nome']   . "</option>" ; 
-                    }
-                
-                
-            
-                }
-            
-        
-        ?> 
-       </select>
 
-    </div>
-    <div class="col">
-     <label for="conc" class="" >
-        Concelho
-        </label>
-        <select name="cod_concelho" class="form-control"  id="conc">
-            <?php
-                
-                $concelho = getConcelhos();
-                if($concelho > 0 ){
-                    foreach($concelho as $valor ){
-                        echo "<option value=" . $valor['cod_concelho'] . ">". $valor['nome'] . "</option>" ; 
-                    }
-                
-                
-            
-                }
-            
-        
-        ?> 
-       </select>
+            <!--  verificar se esta em falta o nome -->
+            <div class=" row">
+                <div class="col">
+                    <label for="nome">Nome:
+                        <?php if (in_array('nome', $missing) ) 
+echo "<span class=\"alerta\" > Introduza Nome*</span>";?>
+                    </label>
+                    <input type="text" class="form-control <?php if (in_array('nome', $missing)) 
+echo " is-invalid";?> " name="nome" id="nome" value="">
 
-    </div>
-    <div class="col">
-     <label for="freg" class="" >
-        Freguesia
-        </label>
-        <select name="cod_freguesia" class="form-control"  id="freg">
-            <?php
-                
-                $freguesias = getFreguesias();
-                if($freguesias > 0 ){
-                    foreach($freguesias as $freg ){
-                        echo "<option value=" . $freg['cod_freguesia'] . ">". $freg['nome'] . "</option>" ; 
-                    }
-                
-                
-            
-                }
-            
-        
-        ?> 
-       </select>
-
-    </div>
-    
-</div>
-
-<div class="row" >
-            <div class="col">
-                         
-                        <label for="nomeR">Nome Responsavel:
-                            <?php if (in_array('name', $missing)) 
-                                echo " Nome em falta";?>
-                        </label>
-                        <input type="text" class="form-control" id="nomeR" name="nomeR" value="<?php if(isset($_POST['nomeR'])) echo $_POST['nomeR'] ?>">
                 </div>
                 <div class="col">
-                   <label for="contatoR">Contacto Responsavel:
-                    <?php if (in_array('name', $missing)) 
-                    echo " Contacto em falta";?>
+                    <label for="email">Email:
+                        <?php if (in_array('email', $missing) ) 
+echo "<span class=\"alerta\" > Introduza Email*</span>";?>
+
                     </label>
-                    <input type="number" class="form-control" id="contatoR" name="contatoR" value="<?php if(isset($_POST['contatoR'])) echo $_POST['contatoR'] ?>">
+                    <input type="text" class="form-control" id="email" name="email" value="">
+                    <span class="help-block"> <?php  // texto de ajuda ou aviso)?> </span>
+
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col">
+
+                    <label for="password">Password:
+                        <?php if (in_array('password', $missing) ) 
+echo "<span class=\"alerta\" > Password em falta*</span>";?>
+                    </label>
+                    <input type="password" class="form-control" name="password" id="password">
+
                 </div>
 
-             </div>
+                <div class="col">
+                    <label for="tel">Telefone:
+                        <?php if (in_array('tel', $missing)) 
+echo " Telefone em falta";?>
+                    </label>
+                    <input type="number" class="form-control  <?php if (in_array('tel', $missing)) 
+echo " isIis-invalid";?>" id="tel" name="tel" value="<?php 
+if(isset($_POST['tel'])) echo $_POST['tel'] ?>">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+
+                    <label for="password2">Repita sua Password:
+                        <?php if (in_array('password2', $missing) ) 
+echo "<span class=\"alerta\" > Password em falta *</span>";?>
+                    </label>
+                    <input type="password" class="form-control" name="password2" id="password2">
+                </div>
+
+                <div class="col">
+
+                    <label for="morada">Morada
+                        <?php if (in_array('morada', $missing)) 
+echo " Nome em falta";?>
+
+                    </label>
+
+                    <input type="text" class="form-control" id="morada" name="morada"
+                        value="<?php if(isset($_POST['morada'])) echo $_POST['morada'] ?>">
+                </div>
 
 
-</div>
-        
+            </div>
 
-<div class="row">
-    
-    <div class="col">
-            
-<label for="description"></label>
-<textarea class="form-control" name="description" cols="10" rows="4" value="<?php if(isset($_POST['description'])) echo $_POST['description'] ?>" > Breve descrição sobre a sua Instituição
+
+
+            <div class="row">
+                <div class="col">
+                    <label for="dist" class="">
+                        Distrito
+                    </label>
+                    <select name="cod_distrito" class="form-control" id="dist">
+                        <?php
+
+$distritos = getDistritos();
+if($distritos > 0 ){
+foreach($distritos as $key => $valor ){
+echo "<option value=" . $valor['cod_distrito'] . ">". $valor['nome']   . "</option>" ; 
+}
+
+
+
+}
+
+
+?>
+                    </select>
+
+                </div>
+                <div class="col">
+                    <label for="conc" class="">
+                        Concelho
+                    </label>
+                    <select name="cod_concelho" class="form-control" id="conc">
+                        <?php
+
+$concelho = getConcelhos();
+if($concelho > 0 ){
+foreach($concelho as $valor ){
+echo "<option value=" . $valor['cod_concelho'] . ">". $valor['nome'] . "</option>" ; 
+}
+
+
+
+}
+
+
+?>
+                    </select>
+
+                </div>
+                <div class="col">
+                    <label for="freg" class="">
+                        Freguesia
+                    </label>
+                    <select name="cod_freguesia" class="form-control" id="freg">
+                        <?php
+
+$freguesias = getFreguesias();
+if($freguesias > 0 ){
+    foreach($freguesias as $freg ){
+        echo "<option value=" . $freg['cod_freguesia'] . ">". $freg['nome'] . "</option>" ; 
+    }
+
+
+
+}
+
+
+?>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col">
+
+                    <label for="nomeR">Nome Responsavel:
+                        <?php if (in_array('name', $missing)) 
+                echo " Nome em falta";?>
+                    </label>
+                    <input type="text" class="form-control" id="nomeR" name="nomeR"
+                        value="<?php if(isset($_POST['nomeR'])) echo $_POST['nomeR'] ?>">
+                </div>
+                <div class="col">
+                    <label for="contatoR">Contacto Responsavel:
+                        <?php if (in_array('name', $missing)) echo " Contacto em falta";?>
+                    </label>
+                    <input type="number" class="form-control" id="contatoR" name="contatoR"
+                        value="<?php if(isset($_POST['contatoR'])) echo $_POST['contatoR'] ?>">
+                </div>
+
+            </div>
+
+
+    </div>
+
+
+    <div class="row">
+        <div class="col">
+
+            <label for="tipo">Tipo de Instituição:
+                <?php if (in_array('name', $missing)) 
+                echo " Nome em falta";?>
+            </label>
+            <input type="text" class="form-control" id="tipo" name="tipo"
+                value="<?php if(isset($_POST['tipo'])) echo $_POST['tipo'] ?>">
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="col">
+
+            <label for="description"></label>
+            <textarea class="form-control" name="description" cols="10" rows="4"
+                value="<?php if(isset($_POST['description'])) echo $_POST['description'] ?>"> Breve descrição sobre a sua Instituição
 </textarea>
 
 
 
 
-    </div>  
-</div>
-<div class="row">
-                <div class="col-auto">
-                    <br>
-            <label for="inputFile" class="col-form-label">Foto de perfil</label>
-            </div>
-           
-    <div class="col">
-        <div class="custom-file">
-            <br>
-     
-                <input type="file" class="form-control-file" id="inputFile"  lang="pt">
-                <span id="passwordHelpInline" class="form-text">
-    Ficheiro max 2mb
 
         </div>
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <br>
+            <label for="inputFile" class="col-form-label">Foto de perfil</label>
+        </div>
+
+        <div class="col">
+            <div class="custom-file">
+                <br>
+
+                <input type="file" class="form-control-file" id="inputFile" lang="pt">
+                <span id="passwordHelpInline" class="form-text">
+                    Ficheiro max 2mb
+
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+
+    <div class="row justify-content-center">
+
+
+        <button type="submit" class="btn btn-primary btn-lg" form="registro" name="submit"
+            value="submit">Registar</button>
 
 
     </div>
-</div>
-                   </div>
-
-<div class="row justify-content-center">
-    
-     
-         <button type="submit" class="btn btn-primary btn-lg" form="registro" name="submit" value="submit">Registar</button>
-        
- 
-</div>
-</div>
-</form>
+    </div>
+    </form>
 
 
 
-</div>
+    </div>
 
 </article>
